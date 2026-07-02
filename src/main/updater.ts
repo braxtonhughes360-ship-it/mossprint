@@ -18,7 +18,7 @@ import { UPDATES_STATE_CHANGED_EVENT } from '@shared/ipc'
  */
 
 const GITHUB_OWNER = 'braxtonhughes360-ship-it'
-const GITHUB_REPO = 'MOSS-Modular-Operating-System-for-Self-'
+const GITHUB_REPO = 'moss'
 const RELEASES_API = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases`
 const RELEASES_PAGE = `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/releases/latest`
 

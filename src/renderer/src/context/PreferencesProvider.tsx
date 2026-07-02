@@ -44,6 +44,22 @@ interface PreferencesContextValue {
 
 const PreferencesContext = createContext<PreferencesContextValue | null>(null)
 
+/**
+ * Weak machines start at Reduced motion so ambient/WebGL never costs a first
+ * impression on hardware that can't afford it. Only shapes the *default* —
+ * stored profiles keep whatever the person chose, and Settings can always
+ * turn Full back on.
+ */
+function defaultPreferencesForDevice(): MossPreferences {
+  const prefs = clonePreferences(DEFAULT_PREFERENCES)
+  const cores = navigator.hardwareConcurrency
+  const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory
+  if ((typeof cores === 'number' && cores <= 2) || (typeof memory === 'number' && memory <= 4)) {
+    prefs.motionIntensity = 'reduced'
+  }
+  return prefs
+}
+
 export function applyPreferencesToDocument(prefs: MossPreferences): void {
   const root = document.documentElement
   const resolved = resolveColorMode(prefs.colorMode)
@@ -62,7 +78,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }): Reac
   const profileId = activeProfile?.id ?? null
 
   const [preferences, setPreferencesState] = useState<MossPreferences>(() => {
-    const prefs = clonePreferences(DEFAULT_PREFERENCES)
+    const prefs = defaultPreferencesForDevice()
     applyPreferencesToDocument(prefs)
     return prefs
   })
@@ -140,7 +156,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }): Reac
   )
 
   const resetPreferences = useCallback(() => {
-    const next = clonePreferences(DEFAULT_PREFERENCES)
+    const next = defaultPreferencesForDevice()
     applyPreferencesToDocument(next)
     setPreferencesState(next)
     void persistPreferences(next, profileId)

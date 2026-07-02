@@ -1,13 +1,13 @@
 {
   "name": "moss",
-  "version": "0.9.0-beta.1",
+  "version": "0.9.0-beta.2",
   "description": "MOSS — Modular Operating System for Self",
   "main": "./out/main/index.js",
   "author": "",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/braxtonhughes360-ship-it/MOSS-Modular-Operating-System-for-Self-.git"
+    "url": "https://github.com/braxtonhughes360-ship-it/moss.git"
   },
   "scripts": {
     "dev": "env -u ELECTRON_RUN_AS_NODE electron-vite dev",
@@ -70,8 +70,8 @@
     "@types/three": "^0.184.1",
     "@vitejs/plugin-react": "^4.5.2",
     "autoprefixer": "^10.4.21",
-    "electron": "^36.4.0",
-    "electron-builder": "^26.0.12",
+    "electron": "^42.5.2",
+    "electron-builder": "^26.15.6",
     "electron-vite": "^3.1.0",
     "postcss": "^8.5.6",
     "r3f-perf": "^7.2.3",
