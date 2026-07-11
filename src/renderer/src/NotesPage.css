@@ -1,0 +1,823 @@
+  /* —— Notes module — document rebuild (R1/R2) ——
+     Apple-Notes structure: folder rail · note list · the open document.
+     Two nouns. The document is warm paper (B6 surface language carried over);
+     text, inline images, checklists, and the ink overlay all live ON it. */
+  .moss-arrival-notes[data-texture='rules']::before {
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 11px,
+      oklch(from var(--moss-accent) l c h / 0.35) 11px,
+      oklch(from var(--moss-accent) l c h / 0.35) 12px
+    );
+  }
+
+  .notes-arrival-band {
+    border-bottom: 1px solid oklch(from var(--moss-chassis-border) l c h / 0.55);
+  }
+
+  .notes-arrival-kicker {
+    @apply font-mono text-xs uppercase tracking-[0.14em];
+    color: var(--moss-chassis-text-muted);
+  }
+
+  .notes-arrival-head {
+    @apply flex flex-wrap items-end justify-between gap-4;
+  }
+
+  .notes-arrival-actions {
+    @apply flex shrink-0 items-center gap-2;
+  }
+
+  .notes-arrival-body {
+    @apply flex min-h-0 flex-1 flex-col gap-4 p-4 md:p-6;
+  }
+
+  /* Three panes, viewport-bound so the list and the document scroll
+     independently (the Inbox pane pattern). */
+  .notes-layout {
+    @apply grid min-h-0 gap-4;
+    grid-template-columns: minmax(9rem, 11rem) minmax(14rem, 18rem) minmax(0, 1fr);
+    height: calc(100vh - 15rem);
+    min-height: 28rem;
+    /* Warm paper ladder for the document (B6). Light: cream page on the module
+       surface; dark: clearly-lighter warm charcoal so the page reads as paper. */
+    --notes-paper: oklch(0.965 0.009 var(--moss-base-h));
+    --notes-paper-border: oklch(0.84 0.014 var(--moss-base-h));
+    --notes-paper-ink: var(--moss-text-primary);
+    --notes-paper-muted: var(--moss-text-muted);
+  }
+
+  [data-color-mode='dark'] .notes-layout {
+    --notes-paper: oklch(0.235 0.024 var(--moss-base-h));
+    --notes-paper-border: oklch(0.34 0.03 var(--moss-base-h));
+    --notes-paper-ink: var(--moss-text-primary);
+    --notes-paper-muted: oklch(from var(--moss-text-muted) l c h / 0.88);
+  }
+
+  @media (max-width: 60rem) {
+    .notes-layout {
+      grid-template-columns: minmax(0, 1fr);
+      height: auto;
+      grid-auto-rows: auto;
+    }
+  }
+
+  /* — Pane 1: folder rail — */
+  .notes-folder-rail {
+    @apply flex min-h-0 flex-col gap-2 overflow-y-auto rounded-xl border p-3;
+    border-color: oklch(from var(--moss-chassis-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface) l c h / 0.55);
+  }
+
+  .notes-sidebar-head {
+    @apply mb-1 flex shrink-0 items-center justify-between gap-2;
+  }
+
+  .notes-sidebar-label {
+    @apply text-xs uppercase tracking-[0.12em];
+    color: var(--moss-chassis-text-muted);
+  }
+
+  .notes-sidebar-icon-btn {
+    @apply inline-flex h-7 w-7 items-center justify-center rounded-md text-sm;
+    border: 1px solid oklch(from var(--moss-chassis-border) l c h / 0.55);
+    color: var(--moss-chassis-text-muted);
+    transform: scale(1);
+    transition:
+      color var(--transition-hover),
+      border-color var(--transition-hover),
+      background-color var(--transition-hover),
+      transform var(--transition-active);
+  }
+
+  .notes-sidebar-icon-btn:hover {
+    color: var(--moss-text-primary);
+    border-color: oklch(from var(--moss-accent) l c h / 0.35);
+    background: oklch(from var(--moss-accent) l c h / 0.06);
+  }
+
+  .notes-sidebar-icon-btn:active {
+    transform: scale(0.96);
+  }
+
+  .notes-sidebar-icon-btn:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .notes-folder-list {
+    @apply flex min-h-0 flex-col gap-1 overflow-y-auto;
+  }
+
+  .notes-folder-row {
+    @apply relative flex items-center;
+  }
+
+  .notes-folder-btn {
+    @apply min-w-0 flex-1 truncate rounded-md px-2 py-1.5 text-left text-sm;
+    color: var(--moss-chassis-text-muted);
+    transform: translateX(0);
+    transition:
+      color var(--transition-hover),
+      background-color var(--transition-hover),
+      transform var(--transition-hover);
+  }
+
+  .notes-folder-btn:hover:not(.notes-folder-btn--active) {
+    color: var(--moss-text-primary);
+    background: oklch(from var(--moss-accent) l c h / 0.06);
+  }
+
+  .notes-folder-btn--active {
+    color: var(--moss-text-primary);
+    font-weight: 600;
+    background: oklch(from var(--moss-accent) l c h / 0.14);
+    box-shadow: inset 3px 0 0 var(--moss-accent);
+  }
+
+  .notes-folder-btn:active:not(.notes-folder-btn--active) {
+    transform: translateX(1px);
+  }
+
+  .notes-folder-btn:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: -2px;
+  }
+
+  /* Rename/delete reveal on hover or keyboard focus — slides in, not popped. */
+  .notes-folder-tools {
+    @apply absolute right-1 flex gap-0.5;
+    opacity: 0;
+    transform: translateX(4px);
+    pointer-events: none;
+    transition:
+      opacity var(--transition-hover),
+      transform var(--transition-hover);
+  }
+
+  .notes-folder-row:hover .notes-folder-tools,
+  .notes-folder-row:focus-within .notes-folder-tools {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .notes-folder-tool-btn {
+    @apply flex h-6 w-6 items-center justify-center rounded text-xs;
+    color: var(--moss-chassis-text-muted);
+    background: oklch(from var(--moss-surface) l c h / 0.92);
+    border: 1px solid oklch(from var(--moss-chassis-border) l c h / 0.45);
+    transform: scale(1);
+    transition:
+      color var(--transition-hover),
+      border-color var(--transition-hover),
+      background-color var(--transition-hover),
+      transform var(--transition-active);
+  }
+
+  .notes-folder-tool-btn:hover {
+    color: var(--moss-text-primary);
+    border-color: oklch(from var(--moss-accent) l c h / 0.35);
+    background: oklch(from var(--moss-surface) l c h / 0.98);
+  }
+
+  .notes-folder-tool-btn:active {
+    transform: scale(0.94);
+  }
+
+  .notes-folder-tool-btn:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 1px;
+  }
+
+  /* — Pane 2: note list — */
+  .notes-list-pane {
+    @apply flex min-h-0 flex-col gap-2 rounded-xl border p-3;
+    border-color: oklch(from var(--moss-chassis-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface) l c h / 0.55);
+  }
+
+  .notes-sidebar-search {
+    @apply shrink-0;
+  }
+
+  .notes-list {
+    @apply flex min-h-0 flex-1 flex-col overflow-y-auto;
+  }
+
+  /* List rows wear the B6 card-face type: display title, muted preview,
+     compact dateline, accent pin dot — one considered card face. */
+  .notes-row {
+    @apply flex flex-col gap-1 rounded-lg px-3 py-2.5 text-left;
+    border: 1px solid transparent;
+    margin-bottom: 2px;
+    transform: translateX(0);
+    transition:
+      background-color var(--transition-hover),
+      border-color var(--transition-hover),
+      box-shadow var(--transition-hover),
+      transform var(--transition-hover);
+  }
+
+  .notes-row:hover:not(.notes-row--active) {
+    background: oklch(from var(--moss-accent) l c h / 0.05);
+    border-color: oklch(from var(--moss-chassis-border) l c h / 0.35);
+  }
+
+  .notes-row:active:not(.notes-row--active) {
+    transform: translateX(1px);
+  }
+
+  .notes-row--active {
+    border-color: oklch(from var(--moss-accent) l c h / 0.45);
+    background: oklch(from var(--moss-accent) l c h / 0.12);
+    box-shadow:
+      inset 3px 0 0 var(--moss-accent),
+      0 1px 0 oklch(from var(--moss-chassis-border) l c h / 0.2);
+  }
+
+  [data-color-mode='dark'] .notes-row--active {
+    border-color: oklch(from var(--moss-accent) l c h / 0.55);
+    background: oklch(from var(--moss-accent) l c h / 0.16);
+    box-shadow:
+      inset 3px 0 0 var(--moss-accent),
+      0 0 0 1px oklch(from var(--moss-accent) l c h / 0.12);
+  }
+
+  .notes-row:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: -2px;
+  }
+
+  .notes-row-head {
+    @apply flex min-w-0 items-baseline gap-2;
+  }
+
+  .notes-row-pin {
+    @apply shrink-0 rounded-full;
+    width: 6px;
+    height: 6px;
+    margin-top: 0.35em;
+    background: var(--moss-accent);
+    box-shadow: 0 0 0 3px oklch(from var(--moss-accent) l c h / 0.18);
+  }
+
+  .notes-row-title {
+    @apply min-w-0 flex-1 truncate text-sm font-semibold leading-snug;
+    color: var(--moss-text-display);
+  }
+
+  .notes-row--active .notes-row-title {
+    color: var(--moss-text-primary);
+  }
+
+  .notes-row-date {
+    @apply shrink-0 text-[10px] uppercase tracking-[0.06em];
+    color: oklch(from var(--moss-text-muted) l c h / 0.85);
+  }
+
+  .notes-row--active .notes-row-date {
+    color: oklch(from var(--moss-accent) l c h / 0.75);
+  }
+
+  .notes-row-preview {
+    @apply truncate pl-0 text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+    padding-left: calc(6px + 0.5rem);
+  }
+
+  .notes-row:not(:has(.notes-row-pin)) .notes-row-preview {
+    padding-left: 0;
+  }
+
+  .notes-empty-copy {
+    @apply text-sm leading-relaxed;
+    color: var(--moss-chassis-text-muted);
+  }
+
+  .notes-empty-copy--list {
+    @apply flex flex-1 flex-col items-center justify-center px-4 py-8 text-center;
+  }
+
+  .notes-empty-copy--editor {
+    @apply max-w-xs text-center;
+  }
+
+  /* — Pane 3: the open document — */
+  .notes-editor {
+    /* relative: the drop overlay + sketch pad anchor to the note surface (QA2-03). */
+    @apply relative flex min-h-0 flex-col overflow-hidden rounded-xl border;
+    border-color: var(--notes-paper-border);
+    background: var(--notes-paper);
+  }
+
+  .notes-editor-empty {
+    @apply flex flex-1 items-center justify-center px-6 py-12;
+  }
+
+  .notes-editor-head {
+    @apply flex shrink-0 flex-col gap-4 border-b px-4 pb-4 pt-5 md:px-6;
+    border-color: oklch(from var(--notes-paper-border) l c h / 0.65);
+  }
+
+  .notes-title-input {
+    @apply w-full border-0 bg-transparent p-0 text-xl outline-none;
+    color: var(--notes-paper-ink);
+    letter-spacing: -0.01em;
+  }
+
+  .notes-title-input::placeholder {
+    color: oklch(from var(--notes-paper-muted) l c h / 0.65);
+  }
+
+  .notes-editor-toolbar {
+    @apply flex flex-wrap items-center gap-x-3 gap-y-2;
+  }
+
+  .notes-toolbar-group {
+    @apply flex flex-wrap items-center gap-1.5;
+    padding: 2px;
+    border-radius: var(--radius-md);
+    border: 1px solid oklch(from var(--notes-paper-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface) l c h / 0.35);
+  }
+
+  [data-color-mode='dark'] .notes-toolbar-group {
+    background: oklch(from var(--moss-surface) l c h / 0.22);
+    border-color: oklch(from var(--notes-paper-border) l c h / 0.7);
+  }
+
+  .notes-toolbar-group--folder {
+    @apply gap-2 px-2 py-1;
+  }
+
+  .notes-toolbar-btn--active {
+    border-color: oklch(from var(--moss-accent) l c h / 0.55) !important;
+    background: oklch(from var(--moss-accent) l c h / 0.18) !important;
+  }
+
+  .notes-toolbar-delete {
+    @apply ml-auto;
+  }
+
+  .notes-folder-move {
+    @apply flex items-center gap-1.5;
+  }
+
+  .notes-folder-select {
+    @apply w-auto max-w-[10rem] border-0 bg-transparent py-0.5 text-xs;
+    color: var(--notes-paper-ink);
+  }
+
+  /* R2 ink toolbar — one instrument while the pen is up. */
+  .notes-ink-toolbar {
+    @apply flex flex-wrap items-center gap-3 rounded-lg border px-2 py-2;
+    border-color: oklch(from var(--moss-accent) l c h / 0.35);
+    background: oklch(from var(--moss-surface) l c h / 0.55);
+  }
+
+  [data-color-mode='dark'] .notes-ink-toolbar {
+    background: oklch(from var(--moss-surface) l c h / 0.35);
+    border-color: oklch(from var(--moss-accent) l c h / 0.45);
+  }
+
+  .notes-ink-toolbar-inner {
+    @apply flex min-w-0 flex-1 flex-wrap items-center gap-2;
+  }
+
+  .notes-ink-done {
+    @apply shrink-0;
+  }
+
+  /* The document scroll region: title/toolbar stay put, the page scrolls. */
+  .notes-doc-scroll {
+    @apply min-h-0 flex-1 overflow-y-auto;
+  }
+
+  .notes-doc {
+    @apply relative mx-auto flex w-full max-w-3xl flex-col gap-3 px-4 py-5 md:px-8;
+  }
+
+  /* R2: viewport-window ink canvas. The sticky zero-height wrapper pins the
+     canvas to the scroll viewport; strokes repaint under a translate, so ink
+     stays glued to the words it annotates. Above the text (ink reads over the
+     page, GoodNotes-style), inert to the pointer until the pen is up. */
+  .notes-ink-sticky {
+    @apply pointer-events-none sticky top-0 z-[5] h-0;
+  }
+
+  .notes-ink-layer {
+    @apply block;
+    pointer-events: none;
+  }
+
+  .notes-ink-layer[data-pen] {
+    pointer-events: auto;
+    touch-action: none;
+    cursor: crosshair;
+  }
+
+  .notes-ink-layer[data-pen][data-tool='eraser'] {
+    cursor: cell;
+  }
+
+  .notes-checklist {
+    @apply flex flex-col gap-2;
+  }
+
+  .notes-checklist-list {
+    @apply flex flex-col gap-1;
+  }
+
+  .notes-checklist-item {
+    @apply flex items-center gap-2;
+  }
+
+  .notes-checklist-row {
+    @apply flex min-w-0 flex-1 items-start gap-2 text-sm;
+  }
+
+  .notes-checklist-label--done {
+    text-decoration: line-through;
+    color: var(--moss-chassis-text-muted);
+  }
+
+  .notes-checklist-remove {
+    @apply shrink-0 rounded px-1 text-sm;
+    color: var(--moss-chassis-text-muted);
+  }
+
+  .notes-checklist-add {
+    @apply flex gap-2;
+  }
+
+  /* QA2-03: the body IS the note paper — no inner border/box, no manual resize
+     handle. field-sizing grows each text block with its content so the page
+     scrolls as one document. */
+  .notes-body-input {
+    @apply resize-none border-0 bg-transparent p-0 text-sm leading-relaxed outline-none;
+    field-sizing: content;
+    color: var(--notes-paper-ink);
+  }
+
+  .notes-body-input::placeholder {
+    color: oklch(from var(--notes-paper-muted) l c h / 0.6);
+  }
+
+  .notes-block-text {
+    min-height: 1.6em;
+  }
+
+  /* The lone text block of an empty note offers a full page to click into. */
+  .notes-block-text--solo {
+    min-height: 16rem;
+    flex: 1;
+  }
+
+  .notes-editor--dropping {
+    border-color: oklch(from var(--moss-accent) l c h / 0.55);
+    background: oklch(from var(--moss-accent) l c h / 0.06);
+  }
+
+  .notes-drop-overlay {
+    @apply pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-xl;
+    border: 2px dashed oklch(from var(--moss-accent) l c h / 0.6);
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+  }
+
+  .notes-drop-hint {
+    @apply text-center text-xs uppercase tracking-[0.08em];
+    color: oklch(from var(--moss-accent) l c h / 0.85);
+  }
+
+  /* — Inline image / drawing blocks (R1: placed IN the document) — */
+  .notes-attachments {
+    @apply flex shrink-0 flex-col gap-3;
+  }
+
+  .notes-attachment {
+    @apply flex;
+  }
+
+  .notes-block-image {
+    @apply my-2;
+  }
+
+  .notes-attachment-figure {
+    @apply relative inline-block max-w-full outline-none;
+  }
+
+  /* Inline figures read as page content, not widgets — quiet at rest. */
+  .notes-inline-figure {
+    border-radius: var(--radius-md);
+    transition: box-shadow var(--transition-hover);
+  }
+
+  .notes-inline-figure:hover,
+  .notes-inline-figure:focus-within {
+    box-shadow: 0 0 0 1px oklch(from var(--notes-paper-border) l c h / 0.55);
+  }
+
+  .notes-attachment-figure:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 3px;
+  }
+
+  .notes-attachment[data-size='small'] .notes-attachment-figure {
+    width: 5rem;
+  }
+
+  .notes-attachment[data-size='medium'] .notes-attachment-figure {
+    width: 10rem;
+  }
+
+  .notes-attachment[data-size='full'] .notes-attachment-figure {
+    width: 100%;
+  }
+
+  .notes-attachment[data-shape='circle'] .notes-attachment-figure {
+    aspect-ratio: 1 / 1;
+  }
+
+  .notes-attachment-img {
+    @apply block h-auto w-full;
+    border: 1px solid oklch(from var(--notes-paper-border) l c h / 0.45);
+    background: oklch(from var(--moss-surface) l c h / 0.35);
+    object-fit: cover;
+    transform: scale(1);
+    transition:
+      opacity var(--transition-hover),
+      transform var(--transition-hover),
+      border-color var(--transition-hover);
+  }
+
+  .notes-inline-figure:hover .notes-attachment-img,
+  .notes-inline-figure:focus-within .notes-attachment-img {
+    border-color: oklch(from var(--moss-accent) l c h / 0.25);
+  }
+
+  .notes-attachment[data-shape='rectangle'] .notes-attachment-img {
+    border-radius: 0;
+  }
+
+  .notes-attachment[data-shape='rounded'] .notes-attachment-img {
+    border-radius: var(--radius-lg);
+  }
+
+  .notes-attachment[data-shape='circle'] .notes-attachment-img {
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  /* Migrated board drawing replayed inline — paper face like the sketch pad. */
+  .notes-block-sketch-canvas {
+    background: var(--moss-base-2);
+    object-fit: unset;
+  }
+
+  /* B5 (§4 sweep): anchored top-left (clearing the top-right remove button)
+     so the size/shape controls are always in view — a full-bleed attachment
+     used to push them below the fold. Reveals downward, not upward. */
+  .notes-attachment-toolbar {
+    @apply absolute left-2 top-2 flex flex-wrap items-center justify-start gap-1;
+    right: 3rem;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition:
+      opacity var(--transition-hover),
+      transform var(--transition-hover);
+  }
+
+  .notes-attachment-figure:hover .notes-attachment-toolbar,
+  .notes-attachment-figure:focus-within .notes-attachment-toolbar {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .notes-attachment-toolbar-group {
+    @apply moss-elevated-surface flex flex-wrap gap-0.5 rounded-lg border p-0.5;
+    border-color: oklch(from var(--moss-chassis-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface) l c h / 0.94);
+    box-shadow: 0 2px 8px oklch(from var(--moss-contrast-12) l c h / 0.08);
+  }
+
+  [data-color-mode='dark'] .notes-attachment-toolbar-group {
+    background: oklch(from var(--moss-surface) l c h / 0.88);
+    box-shadow: 0 2px 10px oklch(from var(--moss-contrast-12) l c h / 0.2);
+  }
+
+  .notes-attachment-style-btn {
+    @apply rounded-md px-2 py-1 text-[10px] font-medium tracking-[0.04em];
+    font-family: var(--font-body);
+    color: var(--moss-chassis-text-muted);
+    transform: scale(1);
+    transition:
+      color var(--transition-hover),
+      opacity var(--transition-hover),
+      transform var(--transition-hover);
+  }
+
+  .notes-attachment-style-btn:hover:not(:disabled) {
+    color: var(--moss-chassis-text);
+  }
+
+  .notes-attachment-style-btn:active:not(:disabled) {
+    transform: scale(0.97);
+    transition: transform var(--transition-active);
+  }
+
+  .notes-attachment-style-btn:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 1px;
+  }
+
+  .notes-attachment-style-btn--active {
+    color: var(--moss-chassis-text);
+    background: oklch(from var(--moss-accent) l c h / 0.12);
+    box-shadow: inset 0 0 0 1px oklch(from var(--moss-accent) l c h / 0.22);
+  }
+
+  .notes-attachment-style-btn:disabled {
+    cursor: default;
+  }
+
+  .notes-attachment-remove {
+    @apply absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full border text-sm;
+    border-color: oklch(from var(--moss-chassis-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface) l c h / 0.92);
+    color: var(--moss-chassis-text-muted);
+    opacity: 0;
+    transform: scale(0.92) translateY(-2px);
+    box-shadow: 0 1px 4px oklch(from var(--moss-contrast-12) l c h / 0.06);
+    transition:
+      color var(--transition-hover),
+      border-color var(--transition-hover),
+      opacity var(--transition-hover),
+      transform var(--transition-hover);
+  }
+
+  .notes-attachment-figure:hover .notes-attachment-remove,
+  .notes-attachment-figure:focus-within .notes-attachment-remove {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  .notes-attachment-remove:hover {
+    color: var(--moss-text-primary);
+    border-color: oklch(from var(--moss-accent) l c h / 0.35);
+    background: oklch(from var(--moss-surface) l c h / 0.98);
+  }
+
+  .notes-attachment-remove:active {
+    transform: scale(0.94);
+    transition: transform var(--transition-active);
+  }
+
+  .notes-attachment-remove:focus-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* Motion tiers — transform/opacity only; instant at reduced/off. */
+  [data-motion='reduced'] .notes-row,
+  [data-motion='off'] .notes-row,
+  [data-motion='reduced'] .notes-folder-btn,
+  [data-motion='off'] .notes-folder-btn,
+  [data-motion='reduced'] .notes-folder-tools,
+  [data-motion='off'] .notes-folder-tools,
+  [data-motion='reduced'] .notes-folder-tool-btn,
+  [data-motion='off'] .notes-folder-tool-btn,
+  [data-motion='reduced'] .notes-sidebar-icon-btn,
+  [data-motion='off'] .notes-sidebar-icon-btn,
+  [data-motion='reduced'] .notes-attachment-toolbar,
+  [data-motion='off'] .notes-attachment-toolbar,
+  [data-motion='reduced'] .notes-attachment-remove,
+  [data-motion='off'] .notes-attachment-remove,
+  [data-motion='reduced'] .notes-inline-figure,
+  [data-motion='off'] .notes-inline-figure,
+  [data-motion='reduced'] .notes-attachment-img,
+  [data-motion='off'] .notes-attachment-img {
+    transition: none !important;
+  }
+
+  [data-motion='reduced'] .notes-row:active:not(.notes-row--active),
+  [data-motion='off'] .notes-row:active:not(.notes-row--active),
+  [data-motion='reduced'] .notes-folder-btn:active:not(.notes-folder-btn--active),
+  [data-motion='off'] .notes-folder-btn:active:not(.notes-folder-btn--active),
+  [data-motion='reduced'] .notes-folder-tool-btn:active,
+  [data-motion='off'] .notes-folder-tool-btn:active,
+  [data-motion='reduced'] .notes-sidebar-icon-btn:active,
+  [data-motion='off'] .notes-sidebar-icon-btn:active {
+    transform: none;
+  }
+
+  [data-motion='reduced'] .notes-folder-tools,
+  [data-motion='off'] .notes-folder-tools {
+    transform: none;
+  }
+
+  [data-motion='reduced'] .notes-attachment-figure:hover .notes-attachment-toolbar,
+  [data-motion='off'] .notes-attachment-figure:hover .notes-attachment-toolbar,
+  [data-motion='reduced'] .notes-attachment-figure:focus-within .notes-attachment-toolbar,
+  [data-motion='off'] .notes-attachment-figure:focus-within .notes-attachment-toolbar,
+  [data-motion='reduced'] .notes-attachment-figure:hover .notes-attachment-remove,
+  [data-motion='off'] .notes-attachment-figure:hover .notes-attachment-remove,
+  [data-motion='reduced'] .notes-attachment-figure:focus-within .notes-attachment-remove,
+  [data-motion='off'] .notes-attachment-figure:focus-within .notes-attachment-remove {
+    transform: none;
+  }
+
+  [data-motion='reduced'] .notes-attachment-style-btn:active:not(:disabled),
+  [data-motion='off'] .notes-attachment-style-btn:active:not(:disabled),
+  [data-motion='reduced'] .notes-attachment-remove:active,
+  [data-motion='off'] .notes-attachment-remove:active {
+    transform: none;
+  }
+
+  /* — Sketch pad (framed drawings; also edits migrated board drawings) — */
+  .notes-sketch {
+    @apply flex shrink-0 flex-col gap-2 rounded-xl border p-3;
+    border-color: oklch(from var(--moss-accent) l c h / 0.3);
+    background: oklch(from var(--moss-surface) l c h / 0.5);
+  }
+
+  /* QA2-03: draw mode overlays the note surface — you draw ON the note, the
+     pad no longer stacks below the textarea like a separate app. Solid-enough
+     paper so strokes read clearly, a whisper of the note beneath for context. */
+  .notes-sketch--overlay {
+    @apply absolute inset-2 z-20 overflow-y-auto shadow-lg;
+    border-color: oklch(from var(--moss-accent) l c h / 0.45);
+    background: oklch(from var(--moss-surface) l c h / 0.97);
+    backdrop-filter: blur(2px);
+  }
+
+  .notes-sketch-head {
+    @apply flex items-center justify-between gap-2;
+  }
+
+  .notes-sketch-actions {
+    @apply flex gap-2;
+  }
+
+  .notes-sketch-toolbar {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  /* Paper matches the exported PNG's fill (--moss-base-2) so what you draw on is
+     what the saved image looks like. touch-action: none keeps pointer strokes from
+     turning into scrolls. */
+  .notes-sketch-canvas {
+    @apply block w-full rounded-lg border;
+    border-color: oklch(from var(--moss-chassis-border) l c h / 0.45);
+    background: var(--moss-base-2);
+    cursor: crosshair;
+    touch-action: none;
+  }
+
+  .notes-sketch-swatch {
+    @apply h-6 w-6 rounded-full border;
+    border-color: oklch(from var(--moss-chassis-border) l c h / 0.55);
+    transform: scale(1);
+    transition:
+      transform var(--transition-hover),
+      box-shadow var(--transition-hover);
+  }
+
+  .notes-sketch-swatch:hover:not(:disabled) {
+    transform: scale(1.08);
+  }
+
+  .notes-sketch-swatch:active:not(:disabled) {
+    transform: scale(0.97);
+    transition: transform var(--transition-active);
+  }
+
+  .notes-sketch-swatch:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .notes-sketch-swatch--active {
+    box-shadow:
+      0 0 0 2px oklch(from var(--moss-surface) l c h / 0.95),
+      0 0 0 4px oklch(from var(--moss-accent) l c h / 0.6);
+  }
+
+  .notes-sketch-swatch:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  [data-motion='reduced'] .notes-sketch-swatch:hover:not(:disabled),
+  [data-motion='off'] .notes-sketch-swatch:hover:not(:disabled),
+  [data-motion='reduced'] .notes-sketch-swatch:active:not(:disabled),
+  [data-motion='off'] .notes-sketch-swatch:active:not(:disabled) {
+    transform: scale(1);
+  }

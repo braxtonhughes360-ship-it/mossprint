@@ -1,0 +1,612 @@
+  .moss-settings-chamber {
+    @apply relative overflow-hidden;
+  }
+
+  .moss-settings-chamber::before {
+    content: '';
+    @apply pointer-events-none absolute inset-x-0 top-0 z-0;
+    height: 8rem;
+    background:
+      radial-gradient(
+        ellipse 75% 100% at 50% 0%,
+        oklch(from var(--moss-accent) l c h / calc(0.12 * var(--moss-field-strength))) 0%,
+        var(--moss-atrium-wash) 38%,
+        transparent 72%
+      );
+  }
+
+  .moss-settings-chamber > * {
+    @apply relative z-[1];
+  }
+
+  /* —— Settings side-nav (one section at a time) —— */
+  .settings-shell {
+    display: grid;
+    grid-template-columns: minmax(11rem, 13rem) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    align-items: start;
+  }
+
+  .settings-sidenav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    position: sticky;
+    top: 1rem;
+  }
+
+  .settings-sidenav-button {
+    @apply flex flex-col gap-0.5 rounded-lg border px-3.5 py-2.5 text-left;
+    border-color: transparent;
+    color: var(--moss-text-muted);
+    background: transparent;
+    transition:
+      color var(--transition-hover),
+      border-color var(--transition-hover),
+      background-color var(--transition-hover),
+      transform var(--transition-hover);
+  }
+
+  .settings-sidenav-button:hover {
+    color: var(--moss-text-primary);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.35);
+  }
+
+  .settings-sidenav-button:active {
+    transform: scale(0.985);
+    transition: transform var(--transition-active);
+  }
+
+  .settings-sidenav-button-active,
+  .settings-sidenav-button-active:hover {
+    color: var(--moss-text-primary);
+    border-color: oklch(from var(--moss-accent) l c h / 0.4);
+    background:
+      linear-gradient(
+        135deg,
+        oklch(from var(--moss-accent) l c h / calc(0.14 * var(--moss-field-strength))) 0%,
+        oklch(from var(--moss-surface-raised) l c h / 0.4) 70%
+      );
+  }
+
+  .settings-sidenav-label {
+    @apply text-sm font-semibold;
+  }
+
+  .settings-sidenav-hint {
+    @apply text-[0.68rem] uppercase tracking-wide;
+    color: var(--moss-text-muted);
+    opacity: 0.85;
+  }
+
+  .settings-content {
+    min-width: 0;
+  }
+
+  .settings-content-head {
+    @apply mb-5 flex flex-col gap-1;
+  }
+
+  .settings-content-hint {
+    @apply text-sm;
+    color: var(--moss-text-muted);
+  }
+
+  .news-reader-title {
+    @apply mt-1 text-base font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .settings-stack {
+    display: flex;
+    max-width: 42rem;
+    flex-direction: column;
+    gap: var(--moss-settings-gap);
+  }
+
+  .settings-card {
+    @apply moss-threshold moss-threshold-surface;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    padding: var(--moss-settings-card-pad);
+  }
+
+  .settings-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background:
+      radial-gradient(
+        ellipse 85% 65% at 100% 0%,
+        oklch(from var(--moss-accent) l c h / calc(0.08 * var(--moss-field-strength))) 0%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 55% 45% at 0% 100%,
+        oklch(0.66 0.035 var(--moss-warm-hue) / calc(0.05 * var(--moss-field-strength))) 0%,
+        transparent 55%
+      );
+  }
+
+  .settings-card:hover {
+    transform: translateY(-1px);
+  }
+
+  .settings-card > * {
+    @apply relative z-[1];
+  }
+
+  .settings-card-memory {
+    @apply mt-1;
+  }
+
+  .settings-card-head {
+    @apply relative z-[1] mb-5;
+  }
+
+  .settings-kicker {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--moss-text-muted);
+  }
+
+  .settings-card-title {
+    @apply mt-2 text-[15px] font-semibold;
+    font-family: var(--font-body);
+    color: var(--moss-text-display);
+  }
+
+  .settings-card-copy {
+    @apply mt-2 max-w-md text-[13px] font-normal leading-[1.65];
+    font-family: var(--font-body);
+    color: var(--moss-text-secondary);
+  }
+
+  .settings-inline-link {
+    @apply underline-offset-2 hover:underline;
+    color: var(--moss-text-primary);
+  }
+
+  .settings-inline-link:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .settings-setup-steps {
+    @apply list-decimal pl-5;
+  }
+
+  .settings-trust-line {
+    @apply max-w-none text-center;
+    color: var(--moss-text-muted);
+  }
+
+  .settings-card-note {
+    color: var(--moss-text-muted);
+  }
+
+  /* LA7 — one-time bundled-model download progress. */
+  .settings-download-track {
+    @apply mt-1 block h-1 w-full max-w-md overflow-hidden rounded-full;
+    background: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .settings-download-fill {
+    @apply block h-full rounded-full;
+    background: var(--moss-accent);
+    transition: width var(--transition-hover);
+  }
+
+  /* .settings-field / .settings-field-label moved to index.css core —
+     the eager profile picker needs them at boot. */
+
+  .settings-text-input {
+    @apply w-full rounded-lg border px-3 py-2.5 text-sm;
+    border-color: var(--moss-border-hairline);
+    background-color: var(--moss-surface-muted);
+    color: var(--moss-text-primary);
+    font-family: var(--font-body);
+  }
+
+  .settings-text-input::placeholder {
+    color: var(--moss-text-faint);
+  }
+
+  .settings-text-input:focus-visible {
+    outline: 2px solid oklch(from var(--moss-accent) l c h / 0.45);
+    outline-offset: 2px;
+  }
+
+  .settings-actions {
+    /* Flex row with a real gap — paired actions (e.g. Change / Remove password)
+       must never render touching. */
+    @apply relative z-[1] flex flex-wrap items-center gap-3 pt-1;
+  }
+
+  .settings-subsection {
+    @apply space-y-3 rounded-lg border p-4;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+    background: oklch(from var(--moss-surface-muted) l c h / 0.35);
+  }
+
+  .settings-subsection-label {
+    @apply text-xs font-semibold uppercase tracking-wide;
+    color: var(--moss-text-muted);
+  }
+
+  .settings-inline-error {
+    @apply mb-3 text-sm;
+    color: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .settings-inline-flash {
+    @apply mb-3 text-sm;
+    color: var(--moss-accent);
+  }
+
+  .moss-setup-consent .settings-card-copy {
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--moss-text-secondary);
+  }
+
+  .moss-setup-consent .settings-card-note {
+    color: var(--moss-text-muted);
+  }
+
+  .moss-setup-consent .settings-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+  }
+
+  .settings-card--news-sources {
+    margin-top: 0.75rem;
+  }
+
+  .settings-card--news-sources .moss-setup-news-panel {
+    margin-top: 0;
+  }
+
+
+  .news-reader-link {
+
+    color: var(--moss-accent);
+  }
+
+
+  .news-reader-panel {
+    @apply rounded-xl border p-4 sm:p-5;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.35);
+  }
+
+  .news-reader-head {
+    @apply mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between;
+  }
+
+  .news-reader-kicker {
+    @apply text-xs uppercase tracking-[0.08em];
+    color: var(--moss-text-muted);
+  }
+
+  .news-reader-meta {
+    @apply text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .news-reader-actions {
+    @apply flex flex-wrap items-center gap-3;
+  }
+
+  .news-reader-empty {
+    @apply rounded-lg border px-4 py-8 text-center;
+    border-color: oklch(from var(--moss-border) l c h / 0.35);
+  }
+
+  .news-reader-empty-title {
+    @apply text-base font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .news-reader-empty-copy {
+    @apply mt-2 text-sm;
+    color: var(--moss-text-muted);
+  }
+
+  .news-reader-filters {
+    @apply mb-4 flex flex-wrap items-center gap-2;
+  }
+
+  .news-reader-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors;
+    border-color: oklch(from var(--moss-border) l c h / 0.5);
+    color: var(--moss-text-secondary);
+    background: oklch(from var(--moss-accent-2) l c h / 0.18);
+  }
+
+  .news-reader-chip:hover {
+    color: var(--moss-accent);
+    border-color: oklch(from var(--moss-accent) l c h / 0.5);
+  }
+
+  .news-reader-chip.news-reader-chip--active {
+    background: var(--moss-accent);
+    border-color: var(--moss-accent);
+    color: oklch(0.99 0.012 var(--moss-hue));
+  }
+
+  .news-reader-chip-count {
+    @apply rounded-full px-1.5 text-[0.65rem] font-medium leading-tight;
+    background: oklch(from var(--moss-text-muted) l c h / 0.16);
+    color: inherit;
+  }
+
+  .news-reader-chip.news-reader-chip--active .news-reader-chip-count {
+    background: oklch(1 0 0 / 0.22);
+    color: oklch(0.99 0.012 var(--moss-hue));
+  }
+
+  .news-reader-chip-alert {
+    @apply inline-block h-1.5 w-1.5 rounded-full;
+    background: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .news-reader-health {
+    @apply mb-3 rounded-md px-3 py-2 text-xs;
+    background: oklch(from var(--moss-accent-3) l c h / 0.25);
+    color: var(--moss-text-secondary);
+  }
+
+  .news-reader-list {
+    @apply divide-y;
+    border-color: oklch(from var(--moss-border) l c h / 0.35);
+  }
+
+  /* Perf (QA-09): the reader renders every filtered item — skip layout/paint
+     for rows outside the scrollport. */
+  .news-reader-row {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 92px;
+  }
+
+  .news-reader-row-button {
+    @apply flex w-full flex-col gap-2 px-1 py-3 text-left transition-colors;
+  }
+
+  .news-reader-row-button:hover {
+    color: var(--moss-accent);
+  }
+
+  .news-reader-row-button:active {
+    opacity: 0.88;
+    transition: opacity var(--transition-active);
+  }
+
+  .news-reader-row-title {
+    @apply text-sm font-medium leading-snug;
+    color: var(--moss-text-primary);
+  }
+
+  .news-reader-row-summary {
+    @apply line-clamp-2 text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .news-reader-row-meta {
+    @apply flex flex-wrap items-center gap-1 text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .news-reader-row-source {
+    @apply inline-flex items-center gap-1.5;
+  }
+
+  .news-reader-filter-divider {
+    @apply self-center px-1 text-[10px] uppercase tracking-wide;
+    color: var(--moss-text-muted);
+    opacity: 0.72;
+  }
+
+  .news-reader-chip--source {
+    @apply inline-flex items-center gap-1.5;
+  }
+
+  .news-reader-meta-sep {
+    opacity: 0.6;
+  }
+
+  .news-reader-unread-dot {
+    @apply ml-2 inline-block h-1.5 w-1.5 rounded-full;
+    background: var(--moss-accent);
+  }
+
+  /* —— Shared settings chrome (calendar / inbox / news panels) —— */
+  .calendar-settings-form {
+    @apply flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-end;
+  }
+
+  .calendar-settings-actions {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .calendar-settings-button {
+    @apply rounded-lg border px-3 py-2 text-sm font-medium;
+    border-color: oklch(from var(--moss-accent) l c h / 0.35);
+    color: var(--moss-accent);
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+    transition:
+      transform var(--transition-hover),
+      filter var(--transition-hover),
+      background var(--transition-hover),
+      border-color var(--transition-hover);
+  }
+
+  .calendar-settings-button:hover:not(:disabled) {
+    filter: brightness(1.08);
+    background: oklch(from var(--moss-accent) l c h / 0.14);
+  }
+
+  .calendar-settings-button:active:not(:disabled) {
+    transform: scale(0.97);
+    filter: brightness(0.96);
+    transition:
+      transform var(--transition-active),
+      filter var(--transition-active);
+  }
+
+  .calendar-settings-button:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .calendar-settings-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .calendar-settings-button--ghost {
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    color: var(--moss-text-secondary);
+    background: transparent;
+    filter: none;
+  }
+
+  .calendar-settings-button--ghost:hover:not(:disabled) {
+    filter: none;
+    background: oklch(from var(--moss-surface-raised) l c h / 0.35);
+    border-color: oklch(from var(--moss-accent) l c h / 0.3);
+    color: var(--moss-text-primary);
+  }
+
+  .calendar-settings-button--ghost:active:not(:disabled) {
+    transform: scale(0.97);
+    filter: none;
+    background: oklch(from var(--moss-surface-raised) l c h / 0.25);
+  }
+
+  .calendar-settings-button--primary {
+    border-color: oklch(from var(--moss-accent) l c h / 0.5);
+    background: oklch(from var(--moss-accent) l c h / 0.16);
+    color: var(--moss-text-primary);
+  }
+
+  .calendar-settings-button--wide {
+    @apply w-full sm:w-auto;
+  }
+
+  .calendar-google-steps {
+    @apply mb-3 list-none space-y-1 p-0 text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .calendar-google-step {
+    @apply flex items-center gap-2;
+  }
+
+  .calendar-google-step::before {
+    content: '○';
+    color: var(--moss-text-muted);
+  }
+
+  .calendar-google-step--done::before {
+    content: '✓';
+    color: var(--moss-accent);
+  }
+
+  .calendar-google-step--active {
+    color: var(--moss-text-primary);
+    font-weight: 500;
+  }
+
+  .calendar-google-step--active::before {
+    content: '●';
+    color: var(--moss-accent);
+  }
+
+  .calendar-google-connected {
+    @apply space-y-2;
+  }
+
+  .calendar-google-status-line {
+    @apply m-0 text-sm font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .calendar-google-status-badge {
+    @apply mr-2 inline-block rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide;
+    color: var(--moss-accent);
+    background: oklch(from var(--moss-accent) l c h / 0.14);
+    border: 1px solid oklch(from var(--moss-accent) l c h / 0.22);
+  }
+
+  .calendar-google-admin-details {
+    @apply mt-2;
+  }
+
+  .calendar-google-admin-list {
+    @apply mt-2 list-decimal space-y-1 pl-5;
+  }
+
+  .calendar-class-days {
+    @apply flex flex-wrap gap-1.5;
+  }
+
+  .calendar-class-day-toggle {
+    @apply rounded-lg border px-2.5 py-1 text-xs font-medium uppercase;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    color: var(--moss-text-secondary);
+  }
+
+  .calendar-class-day-toggle--active {
+    border-color: oklch(from var(--moss-accent) l c h / 0.4);
+    background: oklch(from var(--moss-accent) l c h / 0.12);
+    color: var(--moss-accent);
+  }
+
+  .calendar-class-time-row {
+    @apply grid gap-2 sm:grid-cols-2;
+  }
+
+  .calendar-class-time-field {
+    @apply flex flex-col gap-1;
+  }
+
+  .calendar-settings-source-list {
+    @apply space-y-2 border-t pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.35);
+  }
+
+  .calendar-settings-source-row {
+    @apply flex flex-col gap-1 text-xs sm:flex-row sm:items-center sm:justify-between sm:gap-3;
+    color: var(--moss-text-secondary);
+  }
+
+  .calendar-settings-source-row--off {
+    opacity: 0.55;
+  }
+
+  .calendar-settings-source-meta {
+    @apply sm:ml-auto;
+    color: var(--moss-text-muted);
+  }
+
+  .calendar-settings-button--compact {
+    @apply px-2 py-1 text-[11px];
+  }
+
+  .calendar-settings-planning-link {
+    color: var(--moss-accent);
+  }

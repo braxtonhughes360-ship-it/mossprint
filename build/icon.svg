@@ -1,0 +1,71 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    MOSS app icon — the retained slab mark (MossSymbolMark.tsx: machined slab,
+    diagonal groove, inset screen) redrawn as luminous line geometry on the
+    prismic dark-green base, in the spirit of Perplexity's computer-use icon
+    (dark squircle, glowing outline construction). Master art: rendered to
+    icon.png / icon.icns by `npm run icon:render`.
+  -->
+  <defs>
+    <!-- macOS Big Sur squircle: 824×824 content square centered in 1024 -->
+    <clipPath id="squircle">
+      <rect x="100" y="100" width="824" height="824" rx="186" />
+    </clipPath>
+    <linearGradient id="base" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#182b1f" />
+      <stop offset="0.5" stop-color="#0e1a13" />
+      <stop offset="1" stop-color="#080f0b" />
+    </linearGradient>
+    <radialGradient id="cornerGlow" cx="0.26" cy="0.18" r="0.9">
+      <stop offset="0" stop-color="#c8f04a" stop-opacity="0.22" />
+      <stop offset="0.4" stop-color="#c8f04a" stop-opacity="0.07" />
+      <stop offset="1" stop-color="#c8f04a" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="pulse" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eaff8a" />
+      <stop offset="0.45" stop-color="#c8f04a" />
+      <stop offset="1" stop-color="#6d9c72" />
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="22" />
+    </filter>
+    <filter id="glowWide" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="58" />
+    </filter>
+  </defs>
+
+  <g clip-path="url(#squircle)">
+    <rect x="100" y="100" width="824" height="824" fill="url(#base)" />
+    <rect x="100" y="100" width="824" height="824" fill="url(#cornerGlow)" />
+
+    <!-- fine newsprint ruling, the app canvas signature -->
+    <g stroke="#e8f5d0" stroke-opacity="0.028" stroke-width="2">
+      <path d="M100 216 H924 M100 316 H924 M100 416 H924 M100 516 H924 M100 616 H924 M100 716 H924 M100 816 H924" />
+    </g>
+
+    <!-- ambient pool behind the mark -->
+    <ellipse cx="512" cy="520" rx="330" ry="300" fill="#c8f04a" opacity="0.1" filter="url(#glowWide)" />
+
+    <!-- glow pass of the mark -->
+    <g fill="none" stroke="#c8f04a" stroke-opacity="0.55" stroke-width="36"
+       stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+      <path d="M496 306 H656 Q724 306 724 374 V650 Q724 718 656 718 H368 Q300 718 300 650 V502 A196 196 0 0 1 496 306 Z" />
+      <path d="M302 610 L426 734" />
+      <rect x="488" y="540" width="204" height="150" rx="40" />
+    </g>
+
+    <!-- crisp pass -->
+    <g fill="none" stroke="url(#pulse)" stroke-width="30"
+       stroke-linecap="round" stroke-linejoin="round">
+      <path d="M496 306 H656 Q724 306 724 374 V650 Q724 718 656 718 H368 Q300 718 300 650 V502 A196 196 0 0 1 496 306 Z" fill="#c8f04a" fill-opacity="0.09" />
+      <path d="M302 610 L426 734" stroke-width="34" />
+      <rect x="488" y="540" width="204" height="150" rx="40" stroke-width="26" fill="#0a140e" fill-opacity="0.9" />
+    </g>
+
+    <!-- screen glint -->
+    <rect x="518" y="570" width="70" height="24" rx="12" fill="#deff63" opacity="0.9" />
+
+    <!-- top-edge machined highlight, echoing the component's slab edge -->
+    <path d="M496 306 H656 Q724 306 724 374" fill="none" stroke="#f2ffc2" stroke-opacity="0.85" stroke-width="10" stroke-linecap="round" />
+  </g>
+</svg>
