@@ -1,0 +1,4541 @@
+  .money-detail-rail-derived {
+    color: var(--moss-text-muted);
+    opacity: 0.85;
+  }
+
+  .money-cockpit-hint {
+    @apply m-0 mt-1 text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  /* —— Money flow instrument (month position — nutrition macro strip parity) —— */
+  .money-flow-instrument {
+    @apply relative mb-8 w-full rounded-xl p-4 sm:p-5;
+    border: 1px solid transparent;
+    background-color: var(--moss-canvas-deep);
+    background-clip: padding-box;
+    background-image: linear-gradient(
+      oklch(from var(--moss-surface-raised) l c h / 0.42),
+      oklch(from var(--moss-surface-raised) l c h / 0.42)
+    );
+    box-shadow: inset 0 1px 0 oklch(from var(--moss-accent) l c h / 0.06);
+  }
+
+  .money-flow-instrument::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    border: 1px solid oklch(from var(--moss-text-primary) l c h / 0.05);
+  }
+
+  .money-flow-instrument > * {
+    @apply relative z-[1];
+  }
+
+  .money-flow-instrument-head {
+    @apply flex flex-col items-start gap-2;
+  }
+
+  .money-flow-instrument-hero {
+    @apply flex w-full flex-col items-start gap-0.5;
+  }
+
+  .money-flow-instrument-hero-value {
+    @apply text-[clamp(1.75rem,4vw,2.25rem)] font-semibold leading-none;
+    color: var(--moss-text-display);
+  }
+
+  .money-flow-instrument-hero-label {
+    @apply text-xs font-medium uppercase tracking-wide;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-instrument-hero-line {
+    @apply text-2xl font-semibold leading-snug;
+    color: var(--moss-text-display);
+  }
+
+  .money-flow-instrument-assign-line {
+    @apply m-0 text-xs font-medium;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-instrument-relationship {
+    @apply m-0 max-w-[52ch] text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-instrument-subline {
+    @apply text-[11px];
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-instrument-sep {
+    @apply mx-1;
+    opacity: 0.45;
+  }
+
+  .money-flow-instrument-track {
+    @apply relative my-4 h-2 w-full overflow-hidden rounded-full;
+    background: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-flow-instrument-fill {
+    @apply absolute inset-y-0 left-0 rounded-full;
+    background: linear-gradient(
+      90deg,
+      oklch(from var(--moss-accent) l c h / 0.55),
+      oklch(from var(--moss-accent) l c h / 0.82)
+    );
+    transition: width 480ms var(--moss-ease);
+  }
+
+  .money-flow-instrument-details {
+    @apply mt-4 border-t pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-flow-instrument-details-summary {
+    @apply flex cursor-pointer list-none flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between;
+  }
+
+  .money-flow-instrument-details-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .money-flow-instrument-details-summary:focus-visible {
+    outline: 2px solid oklch(from var(--moss-accent) l c h / 0.65);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  .money-flow-instrument-details-label {
+    @apply text-xs font-medium uppercase tracking-wide;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-instrument-details-hint {
+    @apply text-[11px];
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-instrument-details-grid {
+    @apply m-0 mt-3 grid gap-2;
+  }
+
+  .money-flow-instrument-details-row {
+    @apply flex items-baseline justify-between gap-3 text-[11px];
+  }
+
+  .money-flow-instrument-details-row dt {
+    @apply m-0 font-medium uppercase tracking-wide;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-instrument-details-row dd {
+    @apply m-0 font-medium;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-instrument-details-value--in {
+    color: oklch(from var(--moss-accent) l c h / 0.9);
+  }
+
+  .money-flow-instrument-metrics {
+    @apply grid gap-3 sm:grid-cols-3;
+  }
+
+  .money-flow-instrument-metric-head {
+    @apply flex flex-col gap-0.5;
+  }
+
+  .money-flow-instrument-metric-label {
+    @apply text-xs font-medium uppercase tracking-wide;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-instrument-metric-value {
+    @apply text-sm font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .money-flow-instrument-metric-value--in {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-flow-instrument-metric-bar {
+    @apply mt-1.5 block h-1 w-full overflow-hidden rounded-full;
+    background: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-flow-instrument-metric-fill {
+    @apply block h-full rounded-full;
+    background: oklch(from var(--moss-accent) l c h / 0.65);
+    transition: width 480ms var(--moss-ease);
+  }
+
+  /* —— Money workspace instruments —— */
+  .money-workspace {
+    @apply flex min-w-0 flex-col gap-4;
+  }
+
+  .money-instrument-panel {
+    @apply moss-threshold moss-threshold-surface rounded-xl px-4 py-4 sm:px-5 sm:py-5;
+  }
+
+  .money-instrument-kicker {
+    @apply m-0 text-xs font-medium uppercase tracking-[0.1em];
+    font-family: var(--font-mono);
+    color: oklch(from var(--moss-accent) l c h / 0.85);
+  }
+
+  .money-instrument-title {
+    @apply m-0 mt-1 text-base font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .money-instrument-head {
+    @apply mb-4 flex flex-wrap items-end justify-between gap-3;
+  }
+
+  .money-instrument-empty {
+    @apply py-4 text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-unassigned-hero {
+    border-color: oklch(from var(--moss-accent) l c h / 0.28);
+    background:
+      radial-gradient(
+        ellipse 80% 70% at 100% 0%,
+        oklch(from var(--moss-accent) l c h / 0.1) 0%,
+        transparent 58%
+      ),
+      oklch(from var(--moss-canvas-deep) l c h / 0.55);
+  }
+
+  .money-empty-onboard {
+    padding: var(--space-6);
+    border-color: oklch(from var(--moss-accent) l c h / 0.28);
+    background:
+      radial-gradient(
+        ellipse 90% 80% at 0% 0%,
+        oklch(from var(--moss-accent) l c h / 0.1) 0%,
+        transparent 60%
+      ),
+      oklch(from var(--moss-canvas-deep) l c h / 0.5);
+  }
+
+  .money-empty-onboard .moss-empty-state__title {
+    @apply text-xl font-semibold leading-tight;
+    color: var(--moss-text-display);
+  }
+
+  .money-empty-onboard .moss-empty-state__body {
+    max-width: 46ch;
+  }
+
+  .money-unassigned-value {
+    @apply m-0 mt-2 text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-none;
+    color: var(--moss-text-display);
+  }
+
+  .money-unassigned-caption {
+    @apply m-0 mt-2 text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-derived-tag {
+    @apply ml-1.5 inline-block rounded px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide;
+    color: var(--moss-text-muted);
+    background: oklch(from var(--moss-border) l c h / 0.35);
+    vertical-align: middle;
+  }
+
+  .money-flow-status {
+    @apply inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide;
+  }
+
+  .money-flow-status--on-track {
+    color: oklch(0.45 0.12 145);
+    background: oklch(from var(--moss-accent) l c h / 0.14);
+  }
+
+  .money-flow-status--tight {
+    color: oklch(0.52 0.14 65);
+    background: oklch(0.88 0.08 65 / 0.35);
+  }
+
+  .money-flow-status--over {
+    color: oklch(0.48 0.16 25);
+    background: oklch(0.88 0.08 25 / 0.35);
+  }
+
+  .money-flow-instrument-hero-row {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .money-flow-instrument-rent-glance {
+    @apply m-0 mt-1 text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+    max-width: 52ch;
+  }
+
+  .money-safe-hero {
+    border-color: oklch(from var(--moss-accent) l c h / 0.28);
+    background:
+      radial-gradient(
+        ellipse 80% 70% at 100% 0%,
+        oklch(from var(--moss-accent) l c h / 0.1) 0%,
+        transparent 58%
+      ),
+      oklch(from var(--moss-canvas-deep) l c h / 0.55);
+  }
+
+  .money-safe-hero-head {
+    @apply flex flex-wrap items-center justify-between gap-2;
+  }
+
+  .money-safe-hero-values {
+    @apply mt-4 grid gap-4 sm:grid-cols-2;
+  }
+
+  .money-safe-hero-value-block {
+    @apply flex flex-col gap-1;
+  }
+
+  .money-safe-hero-value-label {
+    @apply text-xs font-medium uppercase tracking-wide;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-why {
+    @apply m-0 text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-panel {
+    @apply mt-0;
+  }
+
+  .money-flow-rent-glance {
+    @apply mb-4 rounded-lg px-3 py-2.5;
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+    border: 1px solid oklch(from var(--moss-accent) l c h / 0.18);
+  }
+
+  .money-flow-panel-head {
+    @apply mb-4;
+  }
+
+  .money-flow-panel-glance {
+    @apply flex flex-col gap-2;
+  }
+
+  .money-flow-panel-glance-row {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .money-flow-rent-pill {
+    @apply inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide;
+  }
+
+  .money-flow-rent-pill--ok {
+    color: oklch(0.45 0.12 145);
+    background: oklch(from var(--moss-accent) l c h / 0.14);
+  }
+
+  .money-flow-rent-pill--warn {
+    color: oklch(0.48 0.16 25);
+    background: oklch(0.88 0.08 25 / 0.35);
+  }
+
+  .money-flow-rent-pill--unset {
+    color: var(--moss-text-muted);
+    background: oklch(from var(--moss-border) l c h / 0.25);
+  }
+
+  /* Housing fundable from unassigned — a nudge, calmer than warn's red. */
+  .money-flow-rent-pill--assign {
+    color: oklch(0.48 0.11 85);
+    background: oklch(0.88 0.06 85 / 0.35);
+  }
+
+  .money-flow-rent-detail {
+    @apply text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-panel-forecast {
+    @apply m-0 text-sm leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-status-note {
+    @apply m-0 mb-4 mt-2 text-sm leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-empty-note {
+    @apply m-0 text-sm;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-timeline--compact .money-flow-timeline-row--compact {
+    @apply flex items-center gap-2 border-0 bg-transparent px-0 py-1;
+  }
+
+  .money-flow-timeline--compact .money-flow-timeline-label {
+    @apply flex-1 text-sm;
+  }
+
+  .money-flow-timeline--compact .money-flow-timeline-amount {
+    @apply text-sm font-medium;
+  }
+
+  .money-flow-rent-inline--ok {
+    color: oklch(0.48 0.1 145);
+  }
+
+  .money-flow-rent-inline--warn {
+    color: oklch(0.48 0.14 25);
+  }
+
+  .money-flow-rent-inline--unset {
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-rent-inline--assign {
+    color: oklch(0.48 0.1 85);
+  }
+
+  .money-flow-variable {
+    @apply mt-4 space-y-3 rounded-lg border px-3 py-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.35);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.2);
+  }
+
+  .money-flow-pressure-list,
+  .money-flow-drift-list {
+    @apply m-0 mt-2 list-none space-y-2 p-0;
+  }
+
+  .money-flow-pressure-row,
+  .money-flow-drift-row {
+    @apply flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-3;
+  }
+
+  .money-flow-pressure-name,
+  .money-flow-drift-label {
+    @apply shrink-0 text-sm font-medium;
+    color: var(--moss-text-display);
+  }
+
+  .money-flow-pressure-detail,
+  .money-flow-drift-copy {
+    @apply text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  /* Deep-link drift row (e.g. "Unfiled spending" → ledger unfiled filter). */
+  .money-flow-drift-row--action {
+    @apply w-full cursor-pointer rounded-md px-2 py-1 text-left;
+    margin-inline: -0.5rem;
+    transition: background var(--transition-hover);
+  }
+
+  .money-flow-drift-row--action:hover {
+    background: oklch(from var(--moss-accent) l c h / 0.06);
+  }
+
+  .money-flow-drift-row--action:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 1px;
+  }
+
+  .money-flow-drift-cta {
+    @apply shrink-0 text-xs font-medium sm:ml-auto;
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-flow-instrument-pressure {
+    color: oklch(0.48 0.14 65);
+  }
+
+  .money-flow-tools {
+    @apply mt-4;
+  }
+
+  .money-flow-tools-trigger {
+    @apply inline-flex w-auto;
+  }
+
+  .money-flow-tools-trigger[aria-expanded='true'] {
+    border-color: oklch(from var(--moss-accent) l c h / 0.35);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.28);
+  }
+
+  .money-flow-tools-modal {
+    @apply flex min-w-0 flex-col gap-4 overflow-x-hidden rounded-xl border p-5;
+    width: min(32rem, calc(100vw - 2rem));
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    background: var(--moss-surface-raised);
+    box-shadow: 0 24px 60px -20px oklch(0.2 0.02 var(--moss-warm-hue) / 0.55);
+  }
+
+  .money-flow-tools-body {
+    @apply min-w-0 space-y-4;
+  }
+
+  .money-flow-tools-modal .money-flow-expected-form {
+    @apply grid-cols-1;
+  }
+
+  .money-flow-tools-modal .money-flow-mini-field--grow {
+    @apply col-span-1;
+  }
+
+  .money-flow-tools-modal .money-flow-breakdown-note {
+    @apply break-words;
+  }
+
+  .money-flow-tools-modal .money-flow-variable {
+    @apply min-w-0;
+  }
+
+  .money-flow-tool {
+    @apply space-y-2;
+  }
+
+  .money-flow-tool-title {
+    @apply m-0 text-sm font-semibold;
+    color: var(--moss-text-display);
+  }
+
+  .money-flow-tool-hint {
+    @apply m-0 text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-tool-note {
+    @apply m-0 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-breakdown {
+    @apply m-0 list-none space-y-2.5 p-0;
+  }
+
+  .money-flow-breakdown li {
+    @apply grid gap-0.5;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+  }
+
+  .money-flow-breakdown-label {
+    @apply text-sm;
+    color: var(--moss-text-primary);
+  }
+
+  .money-flow-breakdown-value {
+    @apply text-sm font-semibold text-right;
+    color: var(--moss-text-display);
+  }
+
+  .money-flow-breakdown-note {
+    @apply col-span-2 text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-afford-row {
+    @apply flex items-center gap-1;
+  }
+
+  .money-flow-afford-prefix {
+    @apply text-sm;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-afford-input {
+    @apply max-w-[8rem];
+  }
+
+  .money-flow-expected-form {
+    @apply grid gap-2 sm:grid-cols-[1fr_1fr_auto_auto] sm:items-end;
+  }
+
+  .money-flow-mini-field {
+    @apply flex flex-col gap-1;
+  }
+
+  .money-flow-mini-field--grow {
+    @apply sm:col-span-2;
+  }
+
+  .money-flow-mini-label {
+    @apply text-[11px];
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-variable-options {
+    @apply space-y-2 border-t pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.25);
+  }
+
+  .money-flow-rent-glance-label {
+    @apply m-0 text-sm font-semibold;
+    color: var(--moss-text-display);
+  }
+
+  .money-flow-timeline-block {
+    @apply mt-0 pt-1;
+  }
+
+  .money-flow-section-label {
+    @apply m-0 mb-2.5 mt-1 text-xs font-semibold uppercase tracking-wide;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-timeline {
+    @apply m-0 list-none space-y-2 p-0;
+  }
+
+  .money-flow-timeline-row {
+    @apply rounded-lg border px-3 py-2;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.25);
+  }
+
+  .money-flow-timeline-date {
+    @apply text-[11px];
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-timeline-main {
+    @apply mt-0.5 flex items-baseline justify-between gap-2;
+  }
+
+  .money-flow-timeline-label {
+    @apply text-sm font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .money-flow-timeline-amount--in {
+    color: oklch(0.48 0.12 145);
+  }
+
+  .money-flow-timeline-amount--out {
+    color: oklch(0.48 0.14 25);
+  }
+
+  .money-flow-timeline-why {
+    @apply m-0 mt-1 text-[11px];
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-readout-grid {
+    @apply my-4 grid gap-3 sm:grid-cols-2;
+  }
+
+  .money-flow-readout {
+    @apply rounded-lg border px-3 py-2.5;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-flow-readout-label {
+    @apply text-xs font-medium;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-readout-value {
+    @apply mt-1 block text-lg font-semibold;
+    color: var(--moss-text-display);
+  }
+
+  .money-flow-alert {
+    @apply mb-4 rounded-lg border px-3 py-2.5;
+  }
+
+  .money-flow-alert--warn {
+    border-color: oklch(0.72 0.12 65 / 0.45);
+    background: oklch(0.94 0.04 65 / 0.25);
+  }
+
+  .money-flow-alert--drift {
+    border-color: oklch(0.72 0.1 250 / 0.4);
+    background: oklch(0.94 0.03 250 / 0.2);
+  }
+
+  .money-flow-alert-title {
+    @apply m-0 text-sm font-semibold;
+    color: var(--moss-text-display);
+  }
+
+  .money-flow-alert-copy {
+    @apply m-0 mt-1 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-risk-list {
+    @apply m-0 mt-2 list-none space-y-1 p-0 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-irregular {
+    @apply mb-4;
+  }
+
+  .money-flow-irregular-body {
+    @apply mt-3 space-y-3;
+  }
+
+  .money-flow-irregular-note {
+    @apply m-0 text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-flow-field {
+    @apply flex flex-col gap-1;
+  }
+
+  .money-flow-field-label {
+    @apply text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-flow-expected-list {
+    @apply m-0 list-none space-y-1 p-0;
+  }
+
+  .money-flow-expected-row {
+    @apply flex flex-wrap items-center gap-2 text-sm;
+  }
+
+  .money-flow-afford-result--yes {
+    color: oklch(0.48 0.12 145);
+  }
+
+  .money-flow-afford-result--no {
+    color: oklch(0.48 0.14 25);
+  }
+
+  .money-envelope-list {
+    @apply m-0 list-none p-0;
+  }
+
+  .money-envelope-instrument {
+    @apply border-b py-4 last:border-b-0;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+    transition: background 280ms var(--moss-ease);
+  }
+
+  .money-envelope-instrument--pulse {
+    animation: money-envelope-pulse 620ms var(--moss-ease);
+  }
+
+  .money-envelope-instrument--overspent {
+    background: oklch(from var(--moss-signal-error-text, oklch(0.62 0.18 25)) l c h / 0.04);
+  }
+
+  .money-envelope-instrument-top {
+    @apply flex flex-wrap items-baseline gap-x-2 gap-y-0.5;
+  }
+
+  .money-envelope-instrument-name {
+    @apply text-sm font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .money-envelope-instrument-remaining {
+    @apply shrink-0 text-sm font-semibold;
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-envelope-instrument-remaining--over {
+    color: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .money-envelope-instrument-meta {
+    @apply mt-1 text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-envelope-assign-hint {
+    @apply mb-3 flex flex-wrap items-start justify-between gap-2 rounded-lg px-3 py-2;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.45);
+    background: oklch(from var(--moss-accent) l c h / 0.06);
+  }
+
+  .money-envelope-assign-hint-copy {
+    @apply m-0 max-w-[52ch] text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-envelope-assign-hint-dismiss {
+    @apply shrink-0;
+  }
+
+  .money-month-wrap-card {
+    @apply mb-3 rounded-lg px-3 py-3;
+    border: 1px solid oklch(from var(--moss-accent) l c h / 0.28);
+    background: oklch(from var(--moss-accent) l c h / 0.07);
+  }
+
+  .money-month-wrap-headline {
+    @apply m-0 mb-2 text-sm leading-snug;
+    color: var(--moss-text);
+  }
+
+  .money-month-wrap-caveat {
+    @apply m-0 mb-3 max-w-[58ch] text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-month-wrap-controls {
+    @apply mb-2 flex flex-wrap items-end gap-2;
+  }
+
+  .money-month-wrap-field {
+    @apply flex min-w-0 flex-col gap-1;
+  }
+
+  .money-month-wrap-field--amount {
+    max-width: 7rem;
+  }
+
+  .money-month-wrap-goal {
+    min-width: 10rem;
+  }
+
+  .money-month-wrap-move {
+    @apply shrink-0;
+  }
+
+  .money-month-wrap-dismiss {
+    @apply mt-1;
+  }
+
+  [data-motion='full'] .money-month-wrap-card--motion {
+    animation: money-month-wrap-enter 420ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) both;
+  }
+
+  [data-motion='reduced'] .money-month-wrap-card--motion,
+  [data-motion='off'] .money-month-wrap-card--motion {
+    animation: none;
+  }
+
+  .money-envelope-instrument-controls {
+    @apply mt-3 flex flex-wrap items-center gap-2;
+  }
+
+  .money-envelope-assign-field {
+    @apply min-w-0 flex-1;
+    max-width: 7rem;
+  }
+
+  .money-input--assign {
+    @apply w-full text-right;
+    font-size: 0.875rem;
+  }
+
+  .money-envelope-quick {
+    @apply flex flex-wrap gap-1.5;
+  }
+
+  /* —— Envelope row: collapsed summary that clicks open into an editor —— */
+  .money-envelope-summary {
+    @apply w-full cursor-pointer rounded-md text-left;
+    transition: background var(--transition-hover), box-shadow var(--transition-hover);
+  }
+
+  .money-envelope-summary:hover .money-envelope-summary-caret {
+    color: var(--moss-text-secondary);
+  }
+
+  .money-envelope-summary:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .money-envelope-summary-right {
+    @apply ml-auto flex shrink-0 items-center gap-2;
+  }
+
+  .money-envelope-summary-caret {
+    color: var(--moss-text-muted);
+    transition: transform var(--transition-hover);
+  }
+
+  .money-envelope-instrument--editing .money-envelope-summary-caret {
+    transform: rotate(180deg);
+  }
+
+  .money-envelope-editor {
+    @apply mt-3 flex flex-col gap-3.5 rounded-lg p-3.5;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.5);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.4);
+  }
+
+  [data-motion='full'] .money-envelope-editor {
+    animation: moss-select-pop-in 140ms var(--moss-ease, ease) both;
+  }
+
+  .money-envelope-editor-field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .money-envelope-editor-label {
+    @apply flex flex-col gap-1.5 text-xs font-medium;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-envelope-editor-label .money-input--assign {
+    @apply text-left;
+    max-width: 10rem;
+  }
+
+  .money-envelope-editor-hint {
+    @apply text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-envelope-editor-action {
+    @apply self-start;
+  }
+
+  .money-envelope-delete-full {
+    @apply mt-1 self-start;
+  }
+
+  .money-envelope-carry {
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-panel--empty {
+    @apply flex flex-col gap-3;
+  }
+
+  .money-savings-headline {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    letter-spacing: -0.02em;
+    color: var(--moss-text-primary);
+  }
+
+  .money-savings-copy {
+    @apply max-w-prose text-sm leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-panel-head {
+    @apply mb-3 flex items-start justify-between gap-3;
+  }
+
+  .money-savings-summary {
+    @apply text-sm;
+    color: var(--moss-text-primary);
+  }
+
+  .money-savings-summary-of {
+    color: var(--moss-text-muted, var(--moss-text-secondary));
+    font-weight: 400;
+  }
+
+  .money-savings-safe {
+    @apply mb-2 text-xs;
+    color: var(--moss-accent);
+  }
+
+  .money-savings-pool {
+    @apply mb-4 text-xs;
+    color: var(--moss-text-primary);
+  }
+
+  .money-savings-safe-note {
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-list {
+    @apply flex flex-col gap-4;
+  }
+
+  .money-savings-card {
+    @apply rounded-xl border p-4;
+    border-color: oklch(from var(--moss-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.35);
+  }
+
+  .money-savings-card-top {
+    @apply mb-3 flex items-start justify-between gap-3;
+  }
+
+  .money-savings-card-kind {
+    @apply mb-0.5 text-xs uppercase tracking-wide;
+    color: var(--moss-text-muted);
+    font-family: var(--font-body);
+  }
+
+  .money-savings-card-name {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    color: var(--moss-text-primary);
+  }
+
+  .money-savings-card-amounts {
+    @apply text-right text-sm shrink-0;
+  }
+
+  .money-savings-card-saved {
+    color: var(--moss-text-primary);
+  }
+
+  .money-savings-card-target {
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-card-amounts-hint {
+    @apply block text-[10px] uppercase tracking-[0.06em];
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-balance-note {
+    @apply m-0 mb-2 text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-savings-panel-error,
+  .money-savings-card-error {
+    @apply m-0 rounded-md px-3 py-2 text-xs leading-relaxed;
+    color: var(--moss-warn-text, oklch(0.45 0.12 25));
+    border: 1px solid oklch(from var(--moss-warn) l c h / 0.35);
+    background: oklch(from var(--moss-warn) l c h / 0.08);
+  }
+
+  .money-savings-panel-error {
+    @apply mb-3;
+  }
+
+  .money-savings-card-error {
+    @apply mb-2;
+  }
+
+  .money-savings-card-period {
+    @apply m-0 mb-2 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-savings-guidance-pace-gap {
+    @apply m-0 mb-2 text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-savings-progress-track {
+    @apply relative h-2 w-full overflow-visible rounded-full;
+    background: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-savings-progress-fill {
+    @apply absolute inset-y-0 left-0 rounded-full;
+    background: oklch(from var(--moss-accent) l c h / 0.85);
+    transition: width 420ms var(--moss-ease);
+  }
+
+  .money-savings-milestone {
+    @apply absolute top-1/2 z-10 h-3 w-0.5 -translate-x-1/2 -translate-y-1/2 rounded-full;
+    background: oklch(from var(--moss-text-muted) l c h / 0.55);
+  }
+
+  .money-savings-milestone--reached {
+    background: oklch(from var(--moss-accent) l c h / 1);
+    box-shadow: 0 0 0 2px oklch(from var(--moss-accent) l c h / 0.25);
+  }
+
+  .money-savings-progress-meta {
+    @apply mt-2 text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-period-line {
+    @apply m-0 mt-2 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-savings-project-funding {
+    @apply m-0 mt-1 text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-activity {
+    @apply mt-3;
+  }
+
+  .money-savings-activity-summary {
+    @apply cursor-pointer list-none text-xs font-medium;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-savings-activity-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .money-savings-activity-summary::before {
+    content: '▸ ';
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .money-savings-activity[open] .money-savings-activity-summary::before {
+    transform: rotate(90deg);
+  }
+
+  .money-savings-activity-summary:focus-visible {
+    outline: 2px solid oklch(from var(--moss-accent) l c h / 0.45);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .money-savings-activity-tape {
+    @apply m-0 mt-2 max-h-32 list-none space-y-0 overflow-y-auto p-0;
+    border-top: 1px solid oklch(from var(--moss-border) l c h / 0.35);
+  }
+
+  .money-savings-activity-row {
+    @apply grid items-center gap-x-2 border-b py-1.5 text-xs;
+    grid-template-columns: minmax(0, 4rem) minmax(0, 1fr) minmax(0, 4.5rem);
+    border-color: oklch(from var(--moss-border) l c h / 0.25);
+  }
+
+  .money-savings-activity-date {
+    color: var(--moss-text-faint);
+  }
+
+  .money-savings-activity-label {
+    @apply truncate;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-savings-activity-amount {
+    @apply text-right;
+    color: var(--moss-text-primary);
+  }
+
+  .money-savings-activity-empty {
+    @apply m-0 mt-2 text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-ledger-link {
+    @apply mt-2 cursor-pointer border-0 bg-transparent p-0 text-xs font-medium underline-offset-2;
+    color: oklch(from var(--moss-accent) l c h);
+    text-decoration: underline transparent;
+    transition: text-decoration-color 0.15s ease;
+  }
+
+  .money-savings-ledger-link:hover {
+    text-decoration-color: oklch(from var(--moss-accent) l c h / 0.65);
+  }
+
+  .money-savings-ledger-link:focus-visible {
+    outline: 2px solid oklch(from var(--moss-accent) l c h / 0.45);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .money-savings-guidance {
+    @apply mt-3 space-y-2;
+  }
+
+  .money-savings-guidance-why {
+    @apply text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-guidance-pace {
+    @apply m-0 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-savings-guidance-pool {
+    @apply m-0 text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-on-track {
+    @apply my-3 space-y-1;
+  }
+
+  .money-savings-on-track-label {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--moss-accent);
+  }
+
+  .money-savings-on-track-why {
+    @apply text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-extra {
+    @apply mt-4 border-t pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.35);
+  }
+
+  .money-savings-extra-summary {
+    @apply cursor-pointer list-none text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-extra-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .money-savings-extra-summary::before {
+    content: '+ ';
+    color: var(--moss-accent);
+  }
+
+  .money-savings-extra[open] .money-savings-extra-summary::before {
+    content: '− ';
+  }
+
+  .money-savings-extra-form {
+    @apply mt-2 flex flex-wrap items-center gap-2;
+  }
+
+  .money-savings-extra-input {
+    @apply h-8 max-w-[6.5rem] px-2 text-sm;
+  }
+
+  .money-savings-guidance-note {
+    @apply text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-contribute {
+    @apply flex flex-wrap items-end gap-2;
+  }
+
+  .money-savings-contribute-form {
+    @apply flex flex-wrap items-end gap-2;
+  }
+
+  .money-savings-contribute-label {
+    @apply flex flex-col gap-1;
+  }
+
+  .money-savings-card-foot {
+    @apply mt-3 flex justify-end;
+  }
+
+  .money-savings-form {
+    @apply flex flex-col gap-4;
+  }
+
+  .money-savings-templates {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .money-savings-template {
+    @apply rounded-full border px-3 py-1.5 text-xs;
+    font-family: var(--font-body);
+    color: var(--moss-text-muted);
+    border-color: oklch(from var(--moss-border) l c h / 0.55);
+    background: transparent;
+    cursor: pointer;
+    transition: color var(--transition-hover), border-color var(--transition-hover);
+  }
+
+  .money-savings-template:hover {
+    color: var(--moss-text-primary);
+  }
+
+  .money-savings-template--active {
+    color: var(--moss-text-primary);
+    border-color: oklch(from var(--moss-accent) l c h / 0.65);
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+  }
+
+  .money-savings-template-copy {
+    @apply text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-savings-field {
+    @apply flex flex-col gap-1;
+  }
+
+  .money-savings-form-actions {
+    @apply flex justify-end gap-2 pt-2;
+  }
+
+  .money-overspent-help {
+    @apply mb-2 text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-cover-select {
+    min-width: 11rem;
+  }
+
+  .money-cover-empty {
+    @apply text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-chip {
+    @apply rounded-md px-2 py-1 text-xs font-medium uppercase tracking-wide;
+    font-family: var(--font-mono);
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    color: var(--moss-text-secondary);
+    background: oklch(from var(--moss-surface) l c h / 0.45);
+  }
+
+  /* QA2-10: one-tap starter envelopes while the budget is young. */
+  .money-starter-row {
+    @apply mt-3 flex flex-wrap items-center gap-2;
+  }
+
+  .money-starter-hint {
+    @apply text-[10px] font-semibold uppercase tracking-wide;
+    color: var(--moss-text-muted);
+  }
+
+  .money-chip--accent {
+    border-color: oklch(from var(--moss-accent) l c h / 0.4);
+    color: oklch(from var(--moss-accent) l c h);
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+  }
+
+  .money-chip--quiet {
+    @apply ml-1 px-1 py-0 text-[10px] normal-case tracking-normal;
+    opacity: 0.85;
+  }
+
+  .money-chip--warn {
+    border-color: oklch(from var(--moss-accent) l c h / 0.45);
+    color: oklch(from var(--moss-accent) l c h);
+    background: oklch(from var(--moss-accent) l c h / 0.12);
+  }
+
+  .money-trust-badge--interactive:focus-visible,
+  .money-trust-why-trigger:focus-visible {
+    outline: 2px solid oklch(from var(--moss-accent) l c h / 0.65);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  .money-trust-why-trigger {
+    cursor: help;
+  }
+
+  .money-chip:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .money-chip:focus-visible {
+    outline: 2px solid oklch(from var(--moss-accent) l c h / 0.65);
+    outline-offset: 2px;
+  }
+
+  /* Honest bill gate: the shortfall note warns, the Pay action stays live. */
+  .money-schedule-short {
+    color: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .money-envelope-add {
+    @apply mb-1 flex w-full flex-wrap items-center gap-2 rounded-xl p-3;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.45);
+    background: oklch(from var(--moss-surface) l c h / 0.3);
+  }
+
+  .money-envelope-add .money-input--inline {
+    flex: 1 1 12rem;
+    min-width: 9rem;
+  }
+
+  .money-envelope-add .money-select--inline {
+    flex: 1 1 10rem;
+  }
+
+  .money-envelope-add .moss-button {
+    @apply ml-auto;
+  }
+
+  .money-income-drawer {
+    @apply py-3;
+  }
+
+  .money-income-drawer-summary {
+    @apply flex cursor-pointer list-none items-center justify-between gap-3;
+  }
+
+  .money-income-drawer-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .money-income-drawer-total {
+    @apply text-sm font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .money-income-list {
+    @apply m-0 mt-3 list-none border-t p-0 pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-income-row {
+    @apply flex items-center justify-between gap-2 py-1.5 text-sm;
+  }
+
+  .money-income-row-date {
+    @apply text-xs;
+    color: oklch(from var(--moss-text) l c h / 0.55);
+  }
+
+  .money-income-account-hint {
+    @apply mb-2 text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-income-ledger-note {
+    @apply mb-2 text-xs leading-relaxed;
+    color: var(--moss-text-muted);
+  }
+
+  .money-income-ledger-note strong {
+    font-weight: 600;
+    color: var(--moss-text-secondary);
+  }
+
+  /* —— Ledger register —— */
+  .money-register {
+    @apply p-0;
+  }
+
+  .money-register .money-instrument-head {
+    @apply mb-0 border-b px-4 py-4 sm:px-5;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-register-net {
+    @apply text-xs;
+    color: oklch(from var(--moss-accent) l c h / 0.9);
+  }
+
+  .money-register-balance-block {
+    @apply flex flex-col gap-0.5;
+  }
+
+  .money-register-balance {
+    @apply text-2xl font-semibold leading-none;
+    color: var(--moss-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .money-register-balance--neg {
+    color: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .money-register-balance-sub {
+    @apply text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-register-scroll {
+    @apply max-h-[min(28rem,52vh)] overflow-y-auto overflow-x-auto px-4 pb-3 sm:px-5;
+  }
+
+  .money-ledger-register {
+    @apply min-w-0;
+  }
+
+  .money-ledger-head-wrap {
+    @apply sticky top-0 z-[2] border-b px-4 sm:px-5;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    background: oklch(from var(--moss-canvas-deep) l c h / 0.96);
+  }
+
+  .money-register-head,
+  .money-register-row {
+    @apply grid items-center gap-x-2 gap-y-1 py-2 text-[11px];
+    grid-template-columns: 3.5rem minmax(0, 1fr) minmax(0, 5rem) 4.5rem 4.5rem 1.5rem;
+  }
+
+  .money-register-head {
+    @apply sticky top-0 z-[1] border-b py-2 uppercase tracking-[0.08em];
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    background: oklch(from var(--moss-canvas-deep) l c h / 0.92);
+    color: var(--moss-text-muted);
+  }
+
+  .money-holdings-register-head,
+  .money-holdings-register-row {
+    @apply grid items-center gap-x-2 gap-y-1 py-2 text-[11px];
+    grid-template-columns:
+      minmax(3.5rem, 1.3fr) 2.5rem minmax(0, 4rem) minmax(0, 4.5rem) minmax(0, 5.5rem) 1.25rem;
+  }
+
+  .money-holdings-register-head span {
+    @apply truncate;
+  }
+
+  /* The asset-class picker may shrink to fit its column — Symbol must never be squeezed out. */
+  .money-holdings-register-row .money-select--inline {
+    min-width: 0;
+  }
+
+  .money-holdings-register-head {
+    @apply sticky top-0 z-[1] border-b py-2 uppercase tracking-[0.08em];
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    background: oklch(from var(--moss-canvas-deep) l c h / 0.92);
+    color: var(--moss-text-muted);
+  }
+
+  .money-register-tape {
+    @apply m-0 list-none p-0;
+  }
+
+  .money-register-row {
+    @apply border-b;
+    border-color: oklch(from var(--moss-border) l c h / 0.28);
+    transition:
+      background var(--transition-hover),
+      border-color var(--transition-hover),
+      opacity var(--transition-active),
+      transform var(--transition-hover);
+  }
+
+  .money-register-row:hover,
+  .money-register-row:focus-within {
+    border-color: oklch(from var(--moss-accent) l c h / 0.28);
+    background: oklch(from var(--moss-accent) l c h / 0.04);
+  }
+
+  .money-register-row:active {
+    opacity: 0.88;
+  }
+
+  [data-motion='full'] .money-register-row:active {
+    transform: translateX(1px);
+    transition:
+      opacity var(--transition-active),
+      transform var(--transition-active);
+  }
+
+  .money-register-memo {
+    @apply truncate;
+    color: var(--moss-text-primary);
+  }
+
+  .money-register-category {
+    @apply truncate text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-register-amount--in {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-register-amount--out {
+    color: var(--moss-text-primary);
+  }
+
+  .money-register-balance {
+    color: var(--moss-text-secondary);
+  }
+
+  .money-register-delete {
+    opacity: 0;
+    transition: opacity 160ms var(--moss-ease);
+  }
+
+  .money-register-row:hover .money-register-delete,
+  .money-register-delete:focus-visible {
+    opacity: 1;
+  }
+
+  .money-register-entry {
+    @apply flex flex-wrap items-center gap-2 border-t px-4 py-3 sm:px-5;
+    border-color: oklch(from var(--moss-accent) l c h / 0.22);
+    background: oklch(from var(--moss-accent) l c h / 0.04);
+  }
+
+  .money-register-entry--pulse {
+    animation: money-register-entry-pulse 620ms var(--moss-ease);
+  }
+
+  .money-input--register {
+    @apply min-h-[2.25rem] flex-1 min-w-[5rem] py-1.5 text-sm;
+  }
+
+  .money-kind-toggle--register .money-kind {
+    @apply py-1 text-xs;
+  }
+
+  .money-register-tape--compact .money-register-row:not(.money-holdings-register-row) {
+    grid-template-columns: minmax(0, 1fr) 5rem 1.5rem;
+  }
+
+  /* —— V2e: ledger hardening (search · types · status · audit · reconcile) —— */
+  .money-ledger-filterbar {
+    @apply flex flex-wrap items-center gap-2 border-b px-4 py-3 sm:px-5;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-ledger-filterbar--more {
+    background: oklch(from var(--moss-surface) l c h / 0.3);
+  }
+
+  /* —— Describe entry · default register surface (LocalAI LA2) —— */
+  .money-describe {
+    @apply flex flex-col gap-2 border-b px-4 py-3 sm:px-5;
+    border-color: oklch(from var(--moss-accent) l c h / 0.22);
+    background: oklch(from var(--moss-accent) l c h / 0.04);
+  }
+
+  /* QA2-06: the flagship input — hero position under the cockpit strip,
+     same accent-toolbar chrome as the calendar describe bar (QA2-05). */
+  .money-describe-hero {
+    @apply mb-5 rounded-xl border p-3;
+    border-color: oklch(from var(--moss-accent) l c h / 0.28);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--moss-surface-raised) l c h / 0.52),
+      oklch(from var(--moss-surface-raised) l c h / 0.32)
+    );
+    box-shadow:
+      inset 0 1px 0 oklch(from var(--moss-accent) l c h / 0.1),
+      0 1px 0 oklch(from var(--moss-canvas) l c h / 0.35);
+  }
+
+  .money-describe-hero-kicker {
+    @apply mb-1 px-1 text-[10px] font-semibold uppercase tracking-wide;
+    color: var(--moss-text-muted);
+  }
+
+  .money-describe-hero .money-describe {
+    @apply border-0 bg-transparent px-1 py-0;
+  }
+
+  .money-describe-hero .money-describe-input {
+    @apply text-base font-medium;
+    border-color: oklch(from var(--moss-accent) l c h / 0.22);
+  }
+
+  .money-describe-form,
+  .money-describe-preview,
+  .money-describe-pending {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .money-describe-pending {
+    min-height: 2.25rem;
+  }
+
+  .money-describe-input {
+    @apply min-h-[2.25rem] flex-1 py-1.5 text-sm;
+    min-width: 12rem;
+  }
+
+  .money-describe-status {
+    @apply m-0 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-describe-status--notice {
+    color: var(--moss-text-muted);
+  }
+
+  /* —— Manual entry disclosure · structured form lives behind it —— */
+  .money-register-manual {
+    @apply flex flex-wrap items-center gap-3 border-t px-4 py-3 sm:px-5;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-register-manual-hint {
+    @apply text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-ledger-search {
+    @apply min-h-[2.25rem] flex-1 py-1.5 text-sm;
+    min-width: 9rem;
+  }
+
+  .money-ledger-undo {
+    @apply mx-4 mt-3 flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm sm:mx-5;
+    border: 1px solid oklch(from var(--moss-accent) l c h / 0.3);
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+    color: var(--moss-text-primary);
+  }
+
+  .money-ledger-undo-actions {
+    @apply flex shrink-0 items-center gap-2;
+  }
+
+  .money-ledger-head,
+  .money-ledger-row {
+    @apply grid w-full min-w-[36rem] items-center gap-x-2 py-2 text-[11px];
+    /* Every column except the memo is a FIXED width so values line up across all
+       rows. (A content-sized envelope track let short "—" rows shift the amount /
+       balance / status columns left vs. rows with a chip or long name.) */
+    /* Envelope track fits the widest chip ("FUNDS BUDGET" at 10px mono +
+       tracking + padding = 91px measured) — at 5rem it clipped to "FUNDS BUDGE". */
+    grid-template-columns: 3.25rem minmax(0, 1fr) 6rem 4.75rem 4.75rem 5.5rem 1.25rem;
+  }
+
+  .money-ledger-head {
+    @apply py-2 uppercase tracking-[0.08em];
+    color: var(--moss-text-muted);
+  }
+
+  /* Header labels sit directly over their (right-aligned) numeric cells. */
+  .money-ledger-col-amount,
+  .money-ledger-col-balance {
+    @apply text-right;
+  }
+
+  .money-ledger-col-status {
+    @apply text-right;
+  }
+
+  .money-ledger-tape {
+    @apply m-0 list-none p-0;
+  }
+
+  .money-ledger-entry {
+    @apply border-b;
+    border-color: oklch(from var(--moss-border) l c h / 0.28);
+    /* Perf (QA-09): the register renders every filtered transaction — let the
+       compositor skip layout/paint for off-screen rows. `auto` keeps the last
+       rendered height so scroll position stays exact. */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 34px;
+  }
+
+  .money-ledger-row {
+    @apply w-full cursor-pointer text-left;
+    transition:
+      background var(--transition-hover),
+      opacity var(--transition-active),
+      transform var(--transition-hover);
+  }
+
+  .money-ledger-row:hover {
+    background: oklch(from var(--moss-accent) l c h / 0.04);
+  }
+
+  .money-ledger-row:active {
+    opacity: 0.88;
+    background: oklch(from var(--moss-accent) l c h / 0.07);
+  }
+
+  .money-ledger-row:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: -2px;
+  }
+
+  [data-motion='full'] .money-ledger-row:active {
+    transform: translateX(1px);
+    transition:
+      opacity var(--transition-active),
+      transform var(--transition-active);
+  }
+
+  .money-ledger-entry--open > .money-ledger-row {
+    background: oklch(from var(--moss-accent) l c h / 0.05);
+  }
+
+  .money-ledger-date {
+    color: var(--moss-text-muted);
+  }
+
+  .money-ledger-main {
+    @apply flex min-w-0 flex-col gap-0.5;
+  }
+
+  .money-ledger-memo-line {
+    @apply flex min-w-0 items-center gap-1.5;
+  }
+
+  .money-merchant-chip {
+    @apply inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-[9px] font-semibold;
+    letter-spacing: 0.02em;
+    color: oklch(0.98 0.01 145);
+    background: oklch(0.58 0.12 145);
+  }
+
+  .money-merchant-chip[data-color='moss'] {
+    background: oklch(0.58 0.12 145);
+  }
+
+  .money-merchant-chip[data-color='ember'] {
+    background: oklch(0.62 0.14 32);
+  }
+
+  .money-merchant-chip[data-color='slate'] {
+    background: oklch(0.55 0.06 220);
+  }
+
+  .money-merchant-chip[data-color='violet'] {
+    background: oklch(0.58 0.14 280);
+  }
+
+  .money-merchant-chip[data-color='rose'] {
+    background: oklch(0.62 0.14 350);
+  }
+
+  .money-merchant-chip--brand {
+    @apply overflow-hidden p-0.5;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.35);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.85);
+  }
+
+  .money-merchant-chip--utility {
+    @apply overflow-hidden p-0.5;
+    color: oklch(0.72 0.16 85);
+    border: 1px solid oklch(from var(--moss-signal-warn-text, oklch(0.72 0.12 75)) l c h / 0.35);
+    background: oklch(from var(--moss-signal-warn-text, oklch(0.72 0.12 75)) l c h / 0.12);
+  }
+
+  .money-merchant-chip--utility .money-merchant-chip-icon {
+    color: oklch(0.72 0.16 85);
+  }
+
+  .money-merchant-chip-icon {
+    @apply block h-full w-full object-contain;
+  }
+
+  .money-ledger-type {
+    @apply inline-flex h-4 w-4 shrink-0 items-center justify-center rounded text-[10px] font-semibold;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.5);
+    color: var(--moss-text-muted);
+  }
+
+  .money-ledger-type--income {
+    color: oklch(from var(--moss-accent) l c h);
+    border-color: oklch(from var(--moss-accent) l c h / 0.4);
+  }
+
+  .money-ledger-type--adjustment {
+    color: var(--moss-signal-warn-text, oklch(0.72 0.12 75));
+    border-color: oklch(from var(--moss-signal-warn-text, oklch(0.72 0.12 75)) l c h / 0.4);
+  }
+
+  .money-ledger-memo {
+    @apply truncate;
+    color: var(--moss-text-primary);
+  }
+
+  .money-ledger-memo-detail {
+    color: var(--moss-text-muted, var(--moss-text-secondary));
+  }
+
+  .money-ledger-transfer-to {
+    color: var(--moss-text-muted);
+  }
+
+  .money-ledger-meta {
+    @apply flex flex-wrap items-center gap-1;
+  }
+
+  .money-ledger-account-tag {
+    @apply rounded px-1.5 py-0.5 text-[10px];
+    background: oklch(from var(--moss-surface) l c h / 0.6);
+    color: var(--moss-text-muted);
+  }
+
+  .money-tag {
+    @apply rounded px-1.5 py-0.5 text-[10px] lowercase;
+    font-family: var(--font-mono);
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.4);
+    color: var(--moss-text-secondary);
+    transition: all var(--transition-hover);
+  }
+
+  .money-tag:hover {
+    border-color: oklch(from var(--moss-accent) l c h / 0.5);
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-tag:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 1px;
+  }
+
+  .money-ledger-category {
+    @apply truncate text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  /* Flag an expense with no envelope so unfiled spending is findable at a glance. */
+  .money-ledger-unfiled-flag {
+    @apply inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] uppercase tracking-[0.06em];
+    font-family: var(--font-mono);
+    color: var(--moss-signal-warn-text, oklch(0.72 0.12 75));
+    border: 1px solid oklch(from var(--moss-signal-warn-text, oklch(0.72 0.12 75)) l c h / 0.4);
+    background: oklch(from var(--moss-signal-warn-text, oklch(0.72 0.12 75)) l c h / 0.1);
+  }
+
+  .money-ledger-unfiled-flag::before {
+    content: '⚑';
+    @apply text-[9px];
+    line-height: 1;
+  }
+
+  /* QA2-08: paychecks merged into the register as display-only income rows. */
+  .money-ledger-row--paycheck {
+    cursor: default;
+    background: oklch(from var(--moss-accent) l c h / 0.04);
+  }
+
+  .money-ledger-paycheck-flag {
+    @apply inline-block max-w-full truncate rounded px-1.5 py-0.5 text-[10px] uppercase tracking-[0.06em];
+    font-family: var(--font-mono);
+    color: var(--moss-accent);
+    border: 1px solid oklch(from var(--moss-accent) l c h / 0.35);
+    background: oklch(from var(--moss-accent) l c h / 0.1);
+  }
+
+  .money-ledger-amount {
+    @apply text-right;
+  }
+
+  .money-ledger-amount--in {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-ledger-amount--out {
+    color: var(--moss-text-primary);
+  }
+
+  .money-ledger-balance {
+    @apply text-right;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-status-pill {
+    @apply justify-self-end rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.06em];
+    font-family: var(--font-mono);
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    color: var(--moss-text-secondary);
+    background: oklch(from var(--moss-surface) l c h / 0.45);
+    transition: all var(--transition-hover);
+  }
+
+  .money-status-pill:hover:not(:disabled) {
+    border-color: oklch(from var(--moss-accent) l c h / 0.45);
+  }
+
+  .money-status-pill:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 1px;
+  }
+
+  .money-status-pill--pending {
+    border-color: oklch(from var(--moss-signal-warn-text, oklch(0.72 0.12 75)) l c h / 0.4);
+    color: var(--moss-signal-warn-text, oklch(0.72 0.12 75));
+    background: oklch(from var(--moss-signal-warn-text, oklch(0.72 0.12 75)) l c h / 0.08);
+  }
+
+  .money-status-pill--reconciled {
+    border-color: oklch(from var(--moss-accent) l c h / 0.45);
+    color: oklch(from var(--moss-accent) l c h);
+    background: oklch(from var(--moss-accent) l c h / 0.1);
+  }
+
+  .money-ledger-caret {
+    @apply justify-self-center text-[10px];
+    color: var(--moss-text-muted);
+    transition: transform 160ms var(--moss-ease);
+  }
+
+  .money-ledger-entry--open .money-ledger-caret {
+    transform: rotate(90deg);
+  }
+
+  /* —— Inspector (details · history · actions · editor) —— */
+  .money-ledger-inspector {
+    @apply px-4 py-3 sm:px-5;
+    border-top: 1px solid oklch(from var(--moss-border) l c h / 0.3);
+    background: oklch(from var(--moss-accent) l c h / 0.03);
+  }
+
+  /* Grouped metadata block — sits below the lead action row. */
+  .money-ledger-meta-group {
+    @apply rounded-lg px-3 py-2.5;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.28);
+    background: oklch(from var(--moss-surface) l c h / 0.35);
+  }
+
+  .money-ledger-details {
+    @apply m-0 grid gap-x-4 gap-y-2;
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  }
+
+  .money-ledger-details div {
+    @apply flex flex-col gap-0.5;
+  }
+
+  .money-ledger-details--wide {
+    grid-column: 1 / -1;
+  }
+
+  .money-ledger-details dt {
+    @apply text-[10px] uppercase tracking-[0.08em];
+    font-family: var(--font-mono);
+    color: var(--moss-text-muted);
+  }
+
+  .money-ledger-details dd {
+    @apply m-0 text-sm;
+    color: var(--moss-text-primary);
+  }
+
+  .money-ledger-splits {
+    @apply m-0 mt-3 list-none rounded-lg p-2 text-xs;
+    background: oklch(from var(--moss-surface) l c h / 0.4);
+  }
+
+  .money-ledger-splits li {
+    @apply flex items-center justify-between gap-3 py-1;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-ledger-history {
+    @apply mt-3;
+  }
+
+  .money-ledger-history-label {
+    @apply m-0 mb-1.5 text-[10px] uppercase tracking-[0.08em];
+    font-family: var(--font-mono);
+    color: var(--moss-text-muted);
+  }
+
+  .money-ledger-history ul {
+    @apply m-0 flex list-none flex-col gap-1.5 p-0;
+  }
+
+  .money-ledger-history li {
+    @apply flex items-center gap-2 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-ledger-history-dot {
+    @apply h-1.5 w-1.5 shrink-0 rounded-full;
+    background: var(--moss-text-muted);
+  }
+
+  .money-ledger-history-dot--created,
+  .money-ledger-history-dot--restored {
+    background: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-ledger-history-dot--edited {
+    background: var(--moss-signal-warn-text, oklch(0.72 0.12 75));
+  }
+
+  .money-ledger-history-dot--deleted {
+    background: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .money-ledger-history-summary {
+    @apply min-w-0 flex-1 truncate;
+  }
+
+  .money-ledger-history-time {
+    @apply shrink-0 text-[10px];
+    color: var(--moss-text-muted);
+  }
+
+  /* Lead the inspector with the actions, then a divider over grouped metadata. */
+  .money-ledger-inspector-actions {
+    @apply mb-3 flex flex-wrap items-center gap-2 border-b pb-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.28);
+  }
+
+  .money-ledger-editor-note {
+    @apply m-0 mb-3 text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-ledger-editor-grid,
+  .money-entry-more {
+    @apply grid gap-3;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  }
+
+  .money-entry-more {
+    @apply mt-2 border-t px-1 pt-3;
+    border-color: oklch(from var(--moss-accent) l c h / 0.18);
+  }
+
+  .money-ledger-field {
+    @apply flex min-w-0 flex-col gap-1;
+  }
+
+  .money-ledger-field--wide {
+    grid-column: span 2;
+  }
+
+  .money-ledger-field-label {
+    @apply text-[10px] uppercase tracking-[0.08em];
+    font-family: var(--font-mono);
+    color: var(--moss-text-muted);
+  }
+
+  .money-ledger-amount-field {
+    @apply flex items-center gap-1.5;
+  }
+
+  .money-sign-toggle {
+    @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-base font-semibold;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    color: var(--moss-text-primary);
+    background: oklch(from var(--moss-surface) l c h / 0.5);
+    transition: all var(--transition-hover);
+  }
+
+  .money-sign-toggle:hover {
+    border-color: oklch(from var(--moss-accent) l c h / 0.45);
+  }
+
+  .money-sign-toggle:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 1px;
+  }
+
+  .money-ledger-editor-actions {
+    @apply mt-3 flex items-center gap-2;
+  }
+
+  /* —— Reconcile drawer —— */
+  .money-reconcile-trigger {
+    @apply flex justify-end;
+  }
+
+  .money-reconcile {
+    @apply moss-threshold moss-threshold-surface flex flex-col gap-4 rounded-xl px-4 py-4 sm:px-5;
+  }
+
+  .money-reconcile-head {
+    @apply flex items-start justify-between gap-3;
+  }
+
+  .money-reconcile-title {
+    @apply m-0 mt-1 text-base font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .money-reconcile-stats {
+    @apply flex flex-wrap gap-x-6 gap-y-2;
+  }
+
+  .money-reconcile-stat {
+    @apply flex flex-col gap-0.5;
+  }
+
+  .money-reconcile-stat-label {
+    @apply text-[10px] uppercase tracking-[0.08em];
+    font-family: var(--font-mono);
+    color: var(--moss-text-muted);
+  }
+
+  .money-reconcile-stat-value {
+    @apply text-lg font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .money-reconcile-match {
+    @apply flex flex-wrap items-end gap-4;
+  }
+
+  .money-reconcile-match .money-ledger-field {
+    @apply flex-1;
+    min-width: 9rem;
+  }
+
+  .money-reconcile-diff {
+    @apply flex items-center gap-3 text-sm font-medium;
+  }
+
+  .money-reconcile-diff--ok {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-reconcile-diff--off {
+    color: var(--moss-signal-warn-text, oklch(0.72 0.12 75));
+  }
+
+  .money-reconcile-foot {
+    @apply flex flex-wrap items-center justify-between gap-3 border-t pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-reconcile-hint {
+    @apply m-0 max-w-[42ch] text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  /* —— Cash accounts bar (V2a) —— */
+  .money-accounts-bar-head {
+    @apply mb-3 flex items-center justify-between gap-3;
+  }
+
+  .money-accounts-chips {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .money-account-chip-wrap {
+    @apply relative inline-flex;
+  }
+
+  .money-account-chip {
+    @apply flex min-w-[7rem] flex-col items-start gap-0.5 rounded-lg px-3 py-2 text-left;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.5);
+    transition:
+      border-color var(--transition-hover),
+      background var(--transition-hover);
+  }
+
+  .money-account-chip:hover {
+    border-color: oklch(from var(--moss-accent) l c h / 0.4);
+  }
+
+  .money-account-chip:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .money-account-chip--active {
+    border-color: oklch(from var(--moss-accent) l c h / 0.5);
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+  }
+
+  .money-account-chip-name {
+    @apply text-sm font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .money-account-chip-balance {
+    @apply text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-account-chip-balance--neg {
+    color: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .money-account-chip-balance--ok {
+    color: var(--moss-text-muted);
+  }
+
+  .money-account-chip-pay {
+    @apply ml-1 rounded-md px-2 py-0.5 text-[11px] font-medium;
+    border: 1px solid oklch(from var(--moss-accent) l c h / 0.4);
+    color: oklch(from var(--moss-accent) l c h);
+    transition:
+      background-color var(--transition-hover),
+      border-color var(--transition-hover);
+  }
+
+  .money-account-chip-pay:hover:not(:disabled) {
+    background: oklch(from var(--moss-accent) l c h / 0.1);
+  }
+
+  .money-account-chip-pay:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  /* —— Credit cards group —— */
+  .money-accounts-credit {
+    @apply mt-3 border-t pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-accounts-credit-head {
+    @apply mb-2 text-[11px] uppercase tracking-[0.08em];
+    color: var(--moss-text-muted);
+  }
+
+  .money-accounts-credit-owed {
+    color: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .money-accounts-credit-note {
+    @apply mt-2 text-[11px] leading-snug;
+    color: var(--moss-text-muted);
+  }
+
+  .money-account-chip-delete {
+    @apply absolute -right-1 -top-1 opacity-0;
+    transition: opacity var(--transition-hover);
+  }
+
+  .money-account-chip-wrap:hover .money-account-chip-delete,
+  .money-account-chip-delete:focus-visible {
+    opacity: 1;
+  }
+
+  .money-accounts-add {
+    @apply mt-3 border-t pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  /* —— Schedules & rules drawers (V2a) —— */
+  .money-schedule-panel,
+  .money-rules-panel {
+    @apply py-3;
+  }
+
+  .money-schedule-list,
+  .money-rule-list {
+    @apply m-0 mt-3 list-none border-t p-0 pt-1;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-schedule-row {
+    @apply flex items-center justify-between gap-3 border-b py-2.5 last:border-b-0;
+    border-color: oklch(from var(--moss-border) l c h / 0.28);
+  }
+
+  .money-schedule-row--due {
+    background: oklch(from var(--moss-accent) l c h / 0.05);
+  }
+
+  .money-schedule-row-main {
+    @apply flex min-w-0 flex-col gap-0.5;
+  }
+
+  .money-schedule-row-label {
+    @apply flex items-center gap-2 text-sm font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .money-schedule-tag {
+    @apply rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em];
+    font-family: var(--font-mono);
+  }
+
+  .money-schedule-tag--income {
+    color: oklch(from var(--moss-accent) l c h);
+    background: oklch(from var(--moss-accent) l c h / 0.1);
+  }
+
+  .money-schedule-tag--bill {
+    color: var(--moss-text-secondary);
+    background: oklch(from var(--moss-border) l c h / 0.35);
+  }
+
+  .money-schedule-row-meta {
+    @apply truncate text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-schedule-amount {
+    @apply shrink-0 text-sm font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .money-schedule-amount--in {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-schedule-amount--out {
+    color: var(--moss-text-primary);
+  }
+
+  .money-schedule-form {
+    @apply mt-3 border-t pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-rules-help {
+    @apply mt-2 text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+    max-width: 52ch;
+  }
+
+  .money-rule-row {
+    @apply flex items-center justify-between gap-3 border-b py-2 last:border-b-0;
+    border-color: oklch(from var(--moss-border) l c h / 0.28);
+  }
+
+  .money-rule-text {
+    @apply flex min-w-0 flex-wrap items-center gap-1.5 text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-rule-field {
+    @apply rounded px-1.5 py-0.5 text-[10px] uppercase tracking-[0.08em];
+    background: oklch(from var(--moss-border) l c h / 0.35);
+    color: var(--moss-text-muted);
+  }
+
+  .money-rule-value {
+    color: var(--moss-text-primary);
+  }
+
+  .money-rule-arrow {
+    color: oklch(from var(--moss-accent) l c h / 0.8);
+  }
+
+  .money-rule-category {
+    @apply font-medium;
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-rule-op {
+    color: var(--moss-text-muted);
+  }
+
+  /* —— Auto-sort rule builder: reads like a sentence —— */
+  .money-rule-builder {
+    @apply mt-3 flex flex-col gap-3 border-t pt-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-rule-builder-sentence {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .money-rule-builder-word {
+    @apply text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-rule-builder .money-select.money-rule-builder-field {
+    flex: 0 1 auto;
+    min-width: 8.5rem;
+  }
+
+  .money-rule-builder-value {
+    flex: 1 1 8rem;
+    min-width: 7rem;
+  }
+
+  /* —— Envelope groups: optional, with clear add + delete —— */
+  .money-group-modal {
+    @apply w-full max-w-sm rounded-xl border p-5;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    background: var(--moss-surface-raised);
+    box-shadow: 0 24px 60px -20px oklch(0.2 0.02 var(--moss-warm-hue) / 0.5);
+  }
+
+  .money-group-modal-form {
+    @apply flex flex-col gap-3;
+  }
+
+  .money-group-modal-title {
+    @apply m-0 text-base font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .money-group-modal-actions {
+    @apply flex items-center justify-end gap-2 pt-1;
+  }
+
+  .money-group-edit-list {
+    @apply flex max-h-72 flex-col gap-2 overflow-auto;
+  }
+
+  .money-group-edit-row {
+    @apply flex items-center gap-2;
+  }
+
+  .money-group-edit-row .money-input {
+    @apply flex-1;
+    min-width: 0;
+  }
+
+  .money-account-modal-field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .money-account-modal-label {
+    @apply text-xs font-medium;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-account-modal-field .moss-select,
+  .money-ledger-field .moss-select {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .money-group-header {
+    @apply flex items-center justify-between gap-2;
+  }
+
+  .money-groups-toolbar {
+    @apply mt-4 flex justify-end;
+  }
+
+  .money-group-toggle {
+    @apply flex min-w-0 flex-1 items-center gap-2 rounded-md py-1 pr-2 text-left;
+    transition: background var(--transition-hover);
+  }
+
+  .money-group-toggle:hover {
+    background: oklch(from var(--moss-border) l c h / 0.28);
+  }
+
+  .money-group-caret {
+    @apply shrink-0;
+    color: var(--moss-text-secondary);
+    transition: transform var(--moss-transition-fast) var(--moss-ease);
+  }
+
+  .money-group-caret[data-collapsed='true'] {
+    transform: rotate(-90deg);
+  }
+
+  .money-group-summary {
+    @apply truncate text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-group-summary--over {
+    color: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .money-group-delete {
+    @apply shrink-0 opacity-60;
+    transition: opacity var(--transition-hover);
+  }
+
+  .money-group-header:hover .money-group-delete,
+  .money-group-delete:focus-visible {
+    opacity: 1;
+  }
+
+  /* —— MossSelect sizing variants per form context —— */
+  .money-select--inline {
+    flex: 0 1 9rem;
+    min-width: 7rem;
+  }
+
+  .money-select--register {
+    flex: 1 1 7rem;
+    min-width: 6rem;
+  }
+
+  /* —— Ledger account tag + split detail (V2a) —— */
+  .money-register-entry-group {
+    @apply list-none;
+  }
+
+  .money-register-account-tag {
+    @apply ml-1.5 rounded px-1.5 py-0.5 text-[10px] uppercase tracking-[0.06em];
+    font-family: var(--font-mono);
+    background: oklch(from var(--moss-border) l c h / 0.32);
+    color: var(--moss-text-muted);
+  }
+
+  .money-register-split-toggle {
+    @apply truncate text-xs;
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-register-split-toggle:hover {
+    text-decoration: underline;
+  }
+
+  .money-register-split-detail {
+    @apply m-0 mb-1 ml-[3.5rem] list-none border-l p-0 pl-3;
+    border-color: oklch(from var(--moss-accent) l c h / 0.3);
+  }
+
+  .money-register-split-detail li {
+    @apply flex items-center justify-between gap-3 py-1 text-[11px];
+  }
+
+  .money-register-split-category {
+    color: var(--moss-text-secondary);
+  }
+
+  .money-register-split-amount {
+    color: var(--moss-text-primary);
+  }
+
+  /* —— Ledger split editor (V2a) —— */
+  .money-register-entry {
+    @apply flex-col items-stretch;
+  }
+
+  .money-register-entry-top {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .money-split-editor {
+    @apply mt-3 flex flex-col gap-2 border-t pt-3;
+    border-color: oklch(from var(--moss-accent) l c h / 0.22);
+  }
+
+  .money-split-editor-head {
+    @apply flex items-center justify-between gap-3;
+  }
+
+  .money-split-remaining {
+    @apply text-xs font-semibold;
+    color: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }
+
+  .money-split-remaining--ok {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-split-line {
+    @apply flex items-center gap-2;
+  }
+
+  /* —— Envelope target field (V2a) —— */
+  .money-envelope-target-field {
+    @apply flex items-center gap-1;
+    max-width: 8.5rem;
+  }
+
+  .money-envelope-target-prefix {
+    @apply text-[10px] uppercase tracking-[0.08em];
+    color: var(--moss-text-muted);
+  }
+
+  .money-envelope-target--under {
+    color: var(--moss-text-muted);
+  }
+
+  .money-envelope-target--met {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  /* —— Investments portfolio —— */
+  .money-portfolio-hero {
+    border-color: oklch(from var(--moss-accent) l c h / 0.25);
+  }
+
+  .money-portfolio-total {
+    @apply m-0 mt-2 text-[clamp(1.5rem,3.5vw,2.25rem)] font-semibold leading-none;
+    color: var(--moss-text-display);
+  }
+
+  .money-portfolio-caption {
+    @apply m-0 mt-2 text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-portfolio-allocation {
+    @apply mt-4;
+  }
+
+  .money-portfolio-allocation-track {
+    @apply flex h-3 overflow-hidden rounded-md;
+    background: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-portfolio-allocation-segment {
+    @apply h-full min-w-[2px] shrink-0;
+    transition: flex-basis 480ms var(--moss-ease), width 480ms var(--moss-ease);
+  }
+
+  /* Distinct hues — relative oklch(from var()) was collapsing to the grey track. */
+  .money-portfolio-allocation-segment--401k {
+    background: oklch(0.52 0.13 145);
+  }
+
+  .money-portfolio-allocation-segment--brokerage {
+    background: oklch(0.58 0.14 240);
+  }
+
+  .money-portfolio-allocation-segment--ira {
+    background: oklch(0.58 0.14 285);
+  }
+
+  .money-portfolio-allocation-segment--other {
+    background: oklch(0.58 0.06 145);
+  }
+
+  .money-portfolio-allocation-segment--stocks {
+    background: oklch(0.52 0.13 145);
+  }
+
+  .money-portfolio-allocation-segment--bonds {
+    background: oklch(0.65 0.14 65);
+  }
+
+  .money-portfolio-allocation-segment--intl-equity {
+    background: oklch(0.58 0.14 240);
+  }
+
+  .money-portfolio-allocation-segment--cash {
+    background: oklch(0.62 0.04 145);
+  }
+
+  .money-portfolio-allocation-segment--real-estate {
+    background: oklch(0.55 0.12 32);
+  }
+
+  .money-portfolio-allocation-segment--unclassified {
+    background: oklch(0.58 0.03 145);
+  }
+
+  .money-portfolio-allocation-segment--tag-0 {
+    background: oklch(0.52 0.13 145);
+  }
+
+  .money-portfolio-allocation-segment--tag-1 {
+    background: oklch(0.65 0.14 65);
+  }
+
+  .money-portfolio-allocation-segment--tag-2 {
+    background: oklch(0.58 0.14 240);
+  }
+
+  .money-portfolio-allocation-segment--tag-3 {
+    background: oklch(0.58 0.14 285);
+  }
+
+  .money-portfolio-allocation-segment--tag-4 {
+    background: oklch(0.55 0.12 32);
+  }
+
+  .money-portfolio-allocation--accounts {
+    @apply mt-4;
+  }
+
+  /* Hover/focus-reveal allocation bar (replaces the old color-key legend). */
+  .money-allocation-bar {
+    @apply relative;
+  }
+
+  .money-allocation-bar .money-portfolio-allocation-segment {
+    @apply cursor-default;
+    outline: none;
+    transition:
+      flex-basis 480ms var(--moss-ease),
+      width 480ms var(--moss-ease),
+      filter 120ms var(--moss-ease);
+  }
+
+  .money-allocation-bar .money-portfolio-allocation-segment:hover,
+  .money-allocation-bar .money-portfolio-allocation-segment:focus-visible,
+  .money-allocation-bar .money-portfolio-allocation-segment--active {
+    filter: brightness(1.12) saturate(1.04);
+  }
+
+  .money-allocation-bar .money-portfolio-allocation-segment:focus-visible {
+    outline: 2px solid oklch(from var(--moss-accent) l c h);
+    outline-offset: 1px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .money-allocation-legend {
+    @apply m-0 mt-2 flex list-none flex-col gap-px p-0 text-[11px];
+  }
+
+  .money-allocation-legend-row {
+    @apply flex items-center gap-1.5 rounded px-1 py-0.5;
+    color: var(--moss-text-secondary);
+    transition: background-color 120ms var(--moss-ease);
+  }
+
+  .money-allocation-legend-row--active {
+    background: oklch(from var(--moss-accent) l c h / 0.09);
+    color: var(--moss-text-display);
+  }
+
+  .money-allocation-legend-dot {
+    @apply inline-block shrink-0 rounded-full;
+    width: 7px;
+    height: 7px;
+  }
+
+  .money-allocation-legend-name {
+    @apply min-w-0 flex-1 truncate;
+  }
+
+  .money-allocation-legend-value {
+    @apply shrink-0 tabular-nums;
+    color: var(--moss-text-muted);
+  }
+
+  .money-allocation-legend-row--active .money-allocation-legend-value {
+    color: var(--moss-text-secondary);
+  }
+
+  .money-invest-quote-status {
+    @apply flex flex-wrap items-center gap-x-1 gap-y-0.5;
+  }
+
+  .money-invest-quote-live {
+    @apply text-xs font-medium uppercase tracking-[0.06em];
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-invest-quote-asof {
+    color: var(--moss-text-muted);
+  }
+
+  .money-invest-track-note {
+    @apply max-w-[52ch];
+  }
+
+  /* V2.75e — holdings-first scan list */
+  .money-invest-holdings-lead {
+    border-color: oklch(from var(--moss-accent) l c h / 0.22);
+  }
+
+  .money-invest-holdings-head,
+  .money-invest-holdings-row {
+    @apply grid items-center gap-x-2 gap-y-0.5 py-2.5 text-[11px];
+    grid-template-columns:
+      minmax(4rem, 1.4fr) minmax(2.5rem, 0.5fr) minmax(3.25rem, 0.7fr) minmax(3.5rem, 0.8fr)
+      minmax(3.25rem, 0.75fr) minmax(2.5rem, 0.5fr) minmax(3rem, 0.6fr);
+  }
+
+  .money-invest-holdings-gain {
+    color: var(--moss-text-muted);
+  }
+
+  .money-invest-performance-empty {
+    @apply m-0 mt-1 text-xs leading-snug;
+    color: var(--moss-text-muted);
+  }
+
+  .money-portfolio-today {
+    @apply mt-0.5 text-sm font-medium;
+  }
+
+  .money-invest-holdings-head {
+    @apply sticky top-0 z-[1] border-b py-2 uppercase tracking-[0.08em];
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+    background: oklch(from var(--moss-canvas-deep) l c h / 0.92);
+    color: var(--moss-text-muted);
+  }
+
+  .money-invest-holdings-col-num,
+  .money-invest-holdings-col-status {
+    @apply text-right;
+  }
+
+  .money-invest-holdings-list {
+    @apply m-0 list-none p-0;
+  }
+
+  .money-invest-holdings-row {
+    @apply border-b;
+    border-color: oklch(from var(--moss-border) l c h / 0.28);
+  }
+
+  .money-invest-holdings-row:hover {
+    background: oklch(from var(--moss-accent) l c h / 0.04);
+  }
+
+  .money-invest-holdings-row--stale {
+    background: oklch(from var(--moss-border) l c h / 0.12);
+  }
+
+  .money-invest-holdings-row--stale:hover {
+    background: oklch(from var(--moss-border) l c h / 0.18);
+  }
+
+  .money-invest-holdings-symbol {
+    @apply flex min-w-0 flex-col gap-0.5;
+  }
+
+  .money-invest-holdings-account {
+    @apply truncate text-[10px] normal-case tracking-normal;
+    color: var(--moss-text-muted);
+  }
+
+  .money-invest-holdings-value {
+    @apply font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .money-invest-holdings-day {
+    color: var(--moss-text-muted);
+  }
+
+  .money-invest-secondary {
+    @apply overflow-hidden;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-invest-secondary-summary {
+    @apply flex cursor-pointer list-none flex-col gap-0.5 px-4 py-3 sm:px-5;
+    color: inherit;
+  }
+
+  .money-invest-secondary-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .money-invest-secondary-summary::after {
+    content: '▸';
+    @apply absolute right-4 top-3 text-xs sm:right-5;
+    color: var(--moss-text-muted);
+    transition: transform 160ms var(--moss-ease);
+  }
+
+  .money-invest-secondary {
+    @apply relative;
+  }
+
+  .money-invest-secondary[open] .money-invest-secondary-summary::after {
+    transform: rotate(90deg);
+  }
+
+  .money-invest-secondary-summary:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: -2px;
+  }
+
+  .money-invest-secondary-body {
+    @apply border-t px-4 pb-4 pt-3 sm:px-5;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-invest-performance {
+    @apply mt-4;
+  }
+
+  .money-invest-performance--secondary {
+    @apply mt-0;
+  }
+
+  .money-invest-performance--secondary .money-invest-performance-cell {
+    @apply px-2 py-1.5;
+  }
+
+  .money-invest-performance--secondary .money-invest-performance-value {
+    @apply text-xs;
+  }
+
+  .money-invest-performance-grid {
+    @apply m-0 mt-2 grid list-none gap-2 p-0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .money-invest-performance-cell {
+    @apply flex flex-col gap-1 rounded-md border px-2.5 py-2;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+    background: oklch(from var(--moss-canvas-deep) l c h / 0.35);
+  }
+
+  .money-invest-performance-label {
+    @apply text-[10px] uppercase tracking-[0.08em];
+    color: var(--moss-text-muted);
+  }
+
+  .money-invest-performance-value {
+    @apply text-sm font-medium;
+  }
+
+  .money-invest-refresh-note {
+    @apply m-0 mt-2 max-w-[52ch];
+  }
+
+  .money-invest-activity-form {
+    @apply mb-3;
+  }
+
+  .money-invest-activity-tape .money-invest-activity-row {
+    @apply grid items-center gap-x-2;
+    grid-template-columns: minmax(0, 5.5rem) 3.5rem minmax(0, 1fr) minmax(0, 4.5rem) 1.5rem;
+  }
+
+  .money-invest-activity-type {
+    @apply text-[10px] uppercase tracking-[0.06em];
+    color: var(--moss-text-muted);
+  }
+
+  .money-portfolio-grid {
+    @apply m-0 grid list-none gap-3 p-0 sm:grid-cols-2;
+  }
+
+  .money-portfolio-card {
+    @apply overflow-hidden rounded-lg border;
+    border-color: oklch(from var(--moss-border) l c h / 0.5);
+    background: oklch(from var(--moss-surface) l c h / 0.35);
+  }
+
+  .money-portfolio-card-head {
+    @apply flex w-full flex-col items-start gap-1 p-3 text-left;
+    color: inherit;
+  }
+
+  .money-portfolio-card-type {
+    @apply text-xs uppercase tracking-[0.12em];
+    font-family: var(--font-mono);
+    color: oklch(from var(--moss-accent) l c h / 0.85);
+  }
+
+  .money-portfolio-card-label {
+    @apply text-sm font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .money-portfolio-card-value {
+    @apply text-lg font-semibold leading-none;
+    color: var(--moss-text-display);
+  }
+
+  .money-portfolio-card-asof {
+    @apply text-xs;
+    color: var(--moss-text-muted);
+  }
+
+  .money-portfolio-card-detail {
+    @apply border-t px-3 py-2;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-form--inline {
+    @apply mt-4 flex-wrap;
+  }
+
+  .money-input--inline {
+    @apply min-h-[2.25rem] min-w-[6rem] flex-1 py-1.5 text-sm;
+  }
+
+  .money-date-field--inline {
+    width: auto;
+    min-width: 6rem;
+    flex: 1 1 6rem;
+  }
+
+  .money-date-field--register {
+    width: auto;
+    min-width: 5rem;
+    flex: 1 1 5rem;
+  }
+
+  .money-delete-button--icon {
+    @apply flex h-6 w-6 items-center justify-center rounded p-0 text-sm leading-none;
+  }
+
+  /* Money module — no page atmosphere patterns (editorial quiet) */
+  .moss-arrival-money::before,
+  .moss-arrival-money::after,
+  .moss-arrival-money[data-texture='quiet']::before,
+  .moss-arrival-money[data-texture='rules']::before {
+    content: none;
+  }
+
+  .moss-arrival-money[data-texture='rules'] .moss-arrival-band,
+  .moss-arrival-money[data-texture='quiet'] .moss-arrival-band {
+    background-image: none;
+  }
+
+  [data-color-mode='light'] .moss-arrival-money::before,
+  [data-color-mode='light'] .moss-arrival-money::after {
+    content: none;
+  }
+
+
+  .money-arrival-kicker {
+    @apply moss-label-tracked;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-arrival-descriptor {
+    @apply mt-2 text-xs uppercase tracking-[0.12em];
+    font-family: var(--font-mono);
+    color: var(--moss-text-muted);
+  }
+
+  .money-arrival-body {
+    @apply relative;
+  }
+
+  .money-arrival-band {
+    position: relative;
+    isolation: isolate;
+    background:
+      linear-gradient(
+        180deg,
+        oklch(from var(--moss-surface-raised) l c h / 0.98) 0%,
+        var(--moss-surface-muted) 100%
+      );
+  }
+
+  .money-arrival-band::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0 z-0;
+    opacity: 0.11;
+    background-color: oklch(from var(--moss-accent) l c h / 0.16);
+    -webkit-mask-image: var(--moss-money-sigil-mask);
+    mask-image: var(--moss-money-sigil-mask);
+    -webkit-mask-size: 64px 20px;
+    mask-size: 64px 20px;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+  }
+
+  .money-arrival-head {
+    @apply flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between;
+  }
+
+  .money-arrival-title-block {
+    @apply min-w-0;
+  }
+
+  .money-arrival-period-block {
+    @apply shrink-0 sm:text-right;
+  }
+
+  .money-page-layout {
+    @apply grid w-full gap-6 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-8;
+    align-items: start;
+  }
+
+  .money-page-main {
+    @apply min-w-0;
+  }
+
+  /* —— Money detail register rail (detail-only — not dashboard clone) —— */
+  .money-detail-rail {
+    @apply relative overflow-hidden rounded-xl border;
+    border-color: oklch(from var(--moss-border) l c h / 0.55);
+    background: oklch(from var(--moss-canvas-deep) l c h / 0.65);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.04),
+      0 1px 0 oklch(1 0 0 / 0.03);
+  }
+
+  .money-detail-rail-ticks {
+    @apply pointer-events-none absolute inset-y-0 left-0 z-[1] w-3;
+    background: repeating-linear-gradient(
+      180deg,
+      oklch(from var(--moss-text-muted) l c h / 0.22) 0,
+      oklch(from var(--moss-text-muted) l c h / 0.22) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+    opacity: 0.35;
+  }
+
+  .money-detail-rail-inner {
+    @apply relative z-[2] p-4 pl-5;
+  }
+
+  .money-detail-rail-kicker {
+    @apply m-0 text-xs font-medium uppercase tracking-wide;
+    color: var(--moss-text-muted);
+  }
+
+  .money-detail-rail-title {
+    @apply m-0 mt-1 text-sm font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .money-detail-rail-ring-block {
+    @apply mt-4 flex flex-col items-start;
+  }
+
+  .money-detail-rail-ring {
+    @apply grid place-items-center rounded-full p-[3px];
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+
+  .money-detail-rail-ring-core {
+    @apply flex h-full w-full flex-col items-center justify-center rounded-full;
+    background: var(--moss-surface-muted);
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.05);
+  }
+
+  .money-detail-rail-ring-label {
+    @apply text-xs font-medium uppercase tracking-wide;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-detail-rail-ring-value {
+    @apply mt-0.5 text-xl font-semibold leading-none;
+    color: var(--moss-text-display);
+  }
+
+  .money-detail-rail-ring-caption {
+    @apply m-0 mt-2 max-w-[14rem] text-center text-xs leading-snug;
+    color: var(--moss-text-muted);
+  }
+
+  .money-detail-rail-section {
+    @apply mt-5;
+  }
+
+  .money-detail-rail-section-label {
+    @apply m-0 mb-2 text-xs font-medium uppercase tracking-wide;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-detail-rail-columns {
+    @apply flex items-end justify-between gap-1.5;
+    height: 5.5rem;
+    padding-top: 0.25rem;
+  }
+
+  .money-detail-rail-column-wrap {
+    @apply flex min-w-0 flex-1 flex-col items-center gap-1;
+  }
+
+  .money-detail-rail-column {
+    @apply relative w-full overflow-hidden rounded-t-sm;
+    min-height: 1.25rem;
+    background: oklch(from var(--moss-border) l c h / 0.35);
+    align-self: flex-end;
+  }
+
+  .money-detail-rail-column-burn {
+    @apply absolute inset-x-0 bottom-0 block w-full;
+    background: oklch(0.58 0.08 var(--burn-hue));
+    opacity: 0.85;
+  }
+
+  .money-detail-rail-column-label {
+    @apply max-w-full truncate text-center text-xs uppercase tracking-wide;
+    color: var(--moss-text-muted);
+  }
+
+  .money-detail-rail-tape {
+    @apply m-0 max-h-32 list-none space-y-0 overflow-y-auto p-0;
+    border-top: 1px solid oklch(from var(--moss-border) l c h / 0.35);
+  }
+
+  .money-detail-rail-tape-row {
+    @apply flex flex-col gap-0.5 border-b py-1.5 text-xs;
+    border-color: oklch(from var(--moss-border) l c h / 0.25);
+  }
+
+  .money-detail-rail-tape-main {
+    @apply flex flex-wrap items-baseline gap-x-2 gap-y-0.5;
+  }
+
+  .money-detail-rail-tape-date {
+    color: var(--moss-text-faint);
+  }
+
+  /* QA2-09: a due schedule reads hot in the Upcoming list. */
+  .money-detail-rail-tape-date--due {
+    color: var(--moss-accent);
+    font-weight: 600;
+  }
+
+  .money-detail-rail-tape-memo {
+    @apply truncate;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-detail-rail-tape-amount--in {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-detail-rail-tape-amount--out {
+    color: var(--moss-text-primary);
+  }
+
+  .money-detail-rail-tape-empty {
+    @apply m-0 text-[11px];
+    color: var(--moss-text-muted);
+  }
+
+  .money-arrival-period {
+    @apply m-0 text-sm;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-period-nav {
+    @apply mt-0 flex items-center justify-start gap-3 sm:justify-end;
+  }
+
+  .money-period-button {
+    @apply flex h-8 w-8 items-center justify-center rounded-md text-sm;
+    font-family: var(--font-mono);
+    color: var(--moss-text-secondary);
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface) l c h / 0.5);
+  }
+
+  .money-period-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .money-period-today {
+    @apply mt-2 text-xs;
+    font-family: var(--font-body);
+    color: var(--moss-accent);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .money-cockpit {
+    @apply mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4;
+    max-width: 42rem;
+  }
+
+  .money-envelope-bar {
+    @apply my-2 h-1 w-full overflow-hidden rounded-full;
+    background: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-envelope-bar-fill {
+    @apply block h-full rounded-full;
+    background: oklch(from var(--moss-accent) l c h / 0.75);
+    transition: width 420ms var(--moss-ease);
+  }
+
+  .money-envelope-bar--instrument {
+    @apply my-2.5 h-1.5;
+  }
+
+  .money-row-actions {
+    @apply flex items-center gap-2;
+  }
+
+  .money-delete-button {
+    @apply rounded px-2 py-1 text-xs;
+    font-family: var(--font-body);
+    color: var(--moss-text-muted);
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.45);
+    background: transparent;
+    transition:
+      color var(--transition-hover),
+      opacity var(--transition-active),
+      transform var(--transition-hover);
+  }
+
+  .money-delete-button:hover:not(:disabled) {
+    color: var(--moss-text-primary);
+  }
+
+  .money-delete-button:active:not(:disabled) {
+    opacity: 0.72;
+  }
+
+  .money-delete-button:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .money-delete-button:disabled {
+    opacity: 0.5;
+  }
+
+  [data-motion='full'] .money-delete-button:active:not(:disabled) {
+    transform: scale(0.97);
+    transition:
+      opacity var(--transition-active),
+      transform var(--transition-active);
+  }
+
+  .money-tab-bar {
+    @apply mb-6 flex gap-2;
+  }
+
+  .money-tab {
+    @apply rounded-lg px-4 py-2 text-sm font-medium;
+    font-family: var(--font-body);
+    color: var(--moss-text-secondary);
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.6);
+    background: oklch(from var(--moss-surface) l c h / 0.5);
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+    transition:
+      transform var(--transition-hover),
+      filter var(--transition-hover),
+      background var(--transition-hover),
+      border-color var(--transition-hover),
+      color var(--transition-hover);
+  }
+
+  .money-tab:hover {
+    filter: brightness(1.08);
+    color: var(--moss-text-primary);
+    border-color: oklch(from var(--moss-accent) l c h / 0.35);
+  }
+
+  .money-tab:active {
+    transform: scale(0.97);
+    filter: brightness(0.96);
+    transition:
+      transform var(--transition-active),
+      filter var(--transition-active);
+  }
+
+  .money-tab:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .money-tab--active {
+    color: var(--moss-text-primary);
+    border-color: oklch(from var(--moss-accent) l c h / 0.45);
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+  }
+
+  /* —— Money Reports (V2d) —— */
+  .money-reports-panel {
+    @apply flex flex-col gap-6;
+  }
+
+  .money-reports-head {
+    @apply flex flex-wrap items-start justify-between gap-4;
+  }
+
+  .money-reports-kicker {
+    @apply mb-1 text-xs font-semibold uppercase tracking-widest;
+    color: var(--moss-text-secondary);
+    letter-spacing: 0.12em;
+  }
+
+  .money-reports-title {
+    @apply text-lg font-semibold;
+    color: var(--moss-text-display);
+  }
+
+  .money-reports-derived {
+    @apply text-sm font-normal;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-view-toggle {
+    @apply flex gap-1 rounded-lg p-0.5;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface) l c h / 0.45);
+  }
+
+  .money-reports-view-btn {
+    @apply rounded-md px-3 py-1.5 text-sm font-medium;
+    color: var(--moss-text-secondary);
+    transition: background var(--transition-hover), color var(--transition-hover);
+  }
+
+  .money-reports-view-btn:hover {
+    color: var(--moss-text-primary);
+  }
+
+  .money-reports-view-btn:focus-visible {
+    outline: 2px solid var(--moss-focus-ring);
+    outline-offset: 1px;
+  }
+
+  .money-reports-view-btn--active {
+    color: var(--moss-text-primary);
+    background: oklch(from var(--moss-accent) l c h / 0.12);
+  }
+
+  .money-reports-toolbar {
+    @apply flex flex-wrap items-end justify-between gap-3;
+  }
+
+  .money-reports-range {
+    @apply flex min-w-[10rem] flex-col gap-1;
+  }
+
+  .money-reports-toolbar-actions {
+    @apply flex items-center gap-2;
+  }
+
+  .money-reports-filter-count {
+    @apply inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full px-1.5 text-xs font-semibold;
+    background: var(--moss-accent);
+    color: oklch(0.99 0.01 145);
+  }
+
+  .money-reports-advanced {
+    @apply flex flex-col gap-4 rounded-xl p-4;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.5);
+    background: oklch(from var(--moss-surface) l c h / 0.3);
+  }
+
+  .money-reports-filterbar {
+    @apply grid gap-3;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  }
+
+  .money-reports-filter-field {
+    @apply flex min-w-0 flex-col gap-1;
+  }
+
+  .money-reports-filter-label {
+    @apply text-xs font-medium;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-presets {
+    @apply flex flex-col gap-3;
+  }
+
+  .money-reports-preset-list {
+    @apply m-0 flex flex-wrap gap-2 p-0;
+    list-style: none;
+  }
+
+  .money-reports-preset-chip {
+    @apply flex items-stretch overflow-hidden rounded-lg;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+  }
+
+  .money-reports-preset-load {
+    @apply px-3 py-1.5 text-sm;
+    color: var(--moss-text-primary);
+    transition: background var(--transition-hover);
+  }
+
+  .money-reports-preset-load:hover {
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+  }
+
+  .money-reports-preset-delete {
+    @apply px-2 text-sm;
+    color: var(--moss-text-secondary);
+    border-left: 1px solid oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-reports-preset-save {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .money-reports-loading,
+  .money-reports-section-empty {
+    @apply text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-empty {
+    @apply rounded-xl px-6 py-10 text-center;
+    border: 1px dashed oklch(from var(--moss-border) l c h / 0.6);
+    background: oklch(from var(--moss-surface) l c h / 0.35);
+  }
+
+  .money-reports-empty-title {
+    @apply mb-2 text-base font-semibold;
+    color: var(--moss-text-display);
+  }
+
+  .money-reports-empty-copy {
+    @apply text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-summary-grid {
+    @apply grid gap-3;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+
+  .money-reports-summary-card {
+    @apply flex flex-col gap-1 rounded-xl p-4;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.65);
+  }
+
+  .money-reports-summary-kicker {
+    @apply text-xs font-semibold uppercase tracking-widest;
+    color: var(--moss-text-secondary);
+    letter-spacing: 0.1em;
+  }
+
+  .money-reports-summary-value {
+    @apply text-xl font-medium;
+    color: var(--moss-text-display);
+  }
+
+  .money-reports-summary-delta {
+    @apply text-xs;
+  }
+
+  .money-report-delta--good {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-report-delta--warn {
+    color: oklch(0.62 0.14 32);
+  }
+
+  .money-report-delta--even {
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-summary-detail {
+    @apply text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-section {
+    @apply flex flex-col gap-3 rounded-xl p-4;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.5);
+    background: oklch(from var(--moss-surface) l c h / 0.4);
+  }
+
+  .money-reports-section-head {
+    @apply flex flex-wrap items-baseline justify-between gap-2;
+  }
+
+  .money-reports-section-title {
+    @apply text-base font-semibold;
+    color: var(--moss-text-display);
+  }
+
+  .money-reports-section-meta {
+    @apply text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-section-hint {
+    @apply -mt-2 mb-1 text-xs;
+    color: var(--moss-text-muted, var(--moss-text-secondary));
+  }
+
+  .money-reports-table {
+    @apply w-full border-collapse text-sm;
+  }
+
+  .money-reports-table th,
+  .money-reports-table td {
+    @apply border-b py-2 text-left;
+    border-color: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-reports-table th {
+    @apply text-xs font-semibold uppercase tracking-wide;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-table-num {
+    text-align: right;
+  }
+
+  .money-report-bars {
+    @apply m-0 flex list-none flex-col gap-3 p-0;
+  }
+
+  .money-report-bar-head {
+    @apply mb-1 flex items-baseline justify-between gap-2 text-sm;
+  }
+
+  .money-report-bar-label {
+    color: var(--moss-text-primary);
+  }
+
+  .money-report-bar-value {
+    color: var(--moss-text-display);
+  }
+
+  .money-report-bar-track {
+    @apply block h-1.5 overflow-hidden rounded-full;
+    background: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-report-bar-fill {
+    @apply block h-full rounded-full;
+    background: var(--moss-accent);
+    transition: width 280ms var(--moss-ease);
+  }
+
+  .money-report-bar-sublabel {
+    @apply mt-0.5 block text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  /* Single-period cash flow — money in / money out bars + plain-language net. */
+  .money-report-cashflow-single {
+    @apply flex flex-col gap-3;
+  }
+
+  .money-report-cashflow-net {
+    @apply text-sm;
+  }
+
+  .money-report-cashflow-net--up {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-report-cashflow-net--down {
+    color: oklch(0.62 0.14 32);
+  }
+
+  /* Multi-month net cash flow — signed columns from a zero baseline. */
+  .money-report-netflow {
+    @apply flex flex-col gap-3;
+  }
+
+  .money-report-netflow-cols {
+    @apply flex items-stretch;
+    gap: 0.5rem;
+  }
+
+  .money-report-netflow-col {
+    @apply flex flex-1 flex-col items-center;
+    gap: 0.375rem;
+    min-width: 1.75rem;
+  }
+
+  .money-report-netflow-plot {
+    @apply relative w-full;
+    height: 7.5rem;
+  }
+
+  .money-report-netflow-baseline {
+    @apply absolute left-0 right-0;
+    top: 50%;
+    height: 1px;
+    background: oklch(from var(--moss-border) l c h / 0.6);
+  }
+
+  .money-report-netflow-bar {
+    @apply absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.25rem;
+    transition: height 360ms var(--moss-ease);
+  }
+
+  .money-report-netflow-bar--up {
+    bottom: 50%;
+    border-radius: 3px 3px 0 0;
+    background: oklch(from var(--moss-accent) l c h / 0.85);
+  }
+
+  .money-report-netflow-bar--down {
+    top: 50%;
+    border-radius: 0 0 3px 3px;
+    background: oklch(0.62 0.12 32 / 0.8);
+  }
+
+  .money-report-netflow-label {
+    @apply text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-report-netflow-legend {
+    @apply max-w-prose text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  /* Single-period budget view — labeled horizontal bars (no lost columns). */
+  .money-report-flowbars {
+    @apply flex flex-col gap-3 py-1;
+  }
+
+  .money-report-flowbar-row {
+    @apply grid items-center gap-3;
+    grid-template-columns: 5rem 1fr auto;
+  }
+
+  .money-report-flowbar-label {
+    @apply text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-report-flowbar-track {
+    @apply block h-2.5 overflow-hidden rounded-full;
+    background: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-report-flowbar-fill {
+    @apply block h-full rounded-full;
+    transition: width 360ms var(--moss-ease);
+  }
+
+  .money-report-flowbar-fill--in {
+    background: var(--moss-accent);
+  }
+
+  .money-report-flowbar-fill--out {
+    background: oklch(0.62 0.14 32);
+  }
+
+  .money-report-flowbar-value {
+    @apply text-sm tabular-nums;
+    color: var(--moss-text-display);
+  }
+
+  /* Single-point net worth — the number, not a lone dot in a void. */
+  .money-report-networth-single {
+    @apply flex flex-col gap-1 py-1;
+  }
+
+  .money-report-networth-single-value {
+    @apply text-2xl font-semibold;
+    color: var(--moss-text-display);
+  }
+
+  .money-report-networth-single-note {
+    @apply max-w-prose text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-report-networth {
+    @apply flex flex-col gap-2;
+  }
+
+  .money-report-networth-readout {
+    @apply flex flex-wrap items-baseline gap-x-3 gap-y-1;
+  }
+
+  .money-report-networth-current {
+    @apply text-2xl font-semibold tabular-nums;
+    color: var(--moss-text-display);
+  }
+
+  .money-report-networth-change {
+    @apply text-sm tabular-nums;
+  }
+
+  .money-report-networth-change--up {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-report-networth-change--down {
+    color: oklch(0.62 0.14 32);
+  }
+
+  .money-report-networth-change--flat {
+    color: var(--moss-text-secondary);
+  }
+
+  .money-report-networth-plot {
+    @apply relative w-full;
+    height: 8rem;
+  }
+
+  .money-report-networth-area {
+    fill: oklch(from var(--moss-accent) l c h / 0.12);
+  }
+
+  .money-report-networth-line {
+    @apply block h-full w-full;
+  }
+
+  .money-report-networth-point {
+    @apply absolute grid place-items-center border-0 bg-transparent p-0;
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+
+  .money-report-networth-dot {
+    @apply block rounded-full;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--moss-accent);
+    box-shadow: 0 0 0 2px var(--moss-canvas);
+    transition: transform 140ms var(--moss-ease);
+  }
+
+  .money-report-networth-point:hover .money-report-networth-dot,
+  .money-report-networth-point--active .money-report-networth-dot {
+    transform: scale(1.5);
+  }
+
+  .money-report-networth-point:focus-visible {
+    outline: 2px solid var(--moss-accent);
+    outline-offset: 2px;
+    border-radius: 9999px;
+  }
+
+  .money-report-networth-tip {
+    @apply pointer-events-none absolute z-10 rounded-md px-2 py-1 text-xs tabular-nums;
+    transform: translate(-50%, calc(-100% - 0.625rem));
+    background: var(--moss-surface-raised);
+    color: var(--moss-text-display);
+    border: 1px solid var(--moss-border);
+    box-shadow: 0 6px 16px oklch(0 0 0 / 0.18);
+    white-space: nowrap;
+  }
+
+  .money-report-networth-axis {
+    @apply flex justify-between text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-report-sparkline {
+    @apply mt-1;
+  }
+
+  /* V2.5c — Where it went flow (Income → groups → top envelopes) */
+  .money-report-where {
+    @apply flex flex-col gap-2;
+  }
+
+  .money-report-where-summary {
+    @apply max-w-prose text-sm leading-relaxed;
+    color: var(--moss-text-primary);
+  }
+
+  .money-report-where-sparse-note {
+    @apply max-w-prose text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-report-where-flow {
+    @apply rounded-xl p-4;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.5);
+    background: oklch(from var(--moss-surface) l c h / 0.35);
+  }
+
+  .money-report-where-stack {
+    @apply flex flex-col gap-3 rounded-xl p-4;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.5);
+    background: oklch(from var(--moss-surface) l c h / 0.35);
+    display: none;
+  }
+
+  [data-motion='reduced'] .money-report-where-flow,
+  [data-motion='off'] .money-report-where-flow {
+    display: none;
+  }
+
+  [data-motion='reduced'] .money-report-where-stack,
+  [data-motion='off'] .money-report-where-stack {
+    display: flex;
+  }
+
+  .money-report-where-labels {
+    @apply mb-2 grid text-xs font-semibold uppercase tracking-widest;
+    grid-template-columns: 33% 42% 25%;
+    color: var(--moss-text-secondary);
+    letter-spacing: 0.1em;
+  }
+
+  .money-report-where-col-label:last-child {
+    text-align: right;
+  }
+
+  .money-report-where-plot {
+    @apply relative w-full;
+    height: 320px;
+  }
+
+  .money-report-where-svg {
+    @apply block w-full;
+    height: 320px;
+  }
+
+  .money-report-where-band {
+    stroke: oklch(from var(--moss-border) l c h / 0.35);
+    stroke-width: 0.5;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .money-report-where-band--kept {
+    fill: oklch(from var(--moss-accent) l c h / 0.2);
+  }
+
+  .money-report-where-ribbon {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .money-report-where-leader {
+    fill: none;
+    stroke: oklch(from var(--moss-text-primary) l c h / 0.32);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  [data-motion='full'] .money-report-where-ribbon {
+    opacity: 0;
+    animation: money-report-where-ribbon-in 520ms var(--moss-ease) forwards;
+  }
+
+  [data-motion='full'] .money-report-where-band {
+    opacity: 0;
+    transform-origin: center top;
+    animation: money-report-where-band-in 480ms var(--moss-ease) forwards;
+  }
+
+  [data-motion='full'] .money-report-where-ribbon:nth-child(1),
+  [data-motion='full'] .money-report-where-band:nth-of-type(1) {
+    animation-delay: 40ms;
+  }
+
+  [data-motion='full'] .money-report-where-ribbon:nth-child(2),
+  [data-motion='full'] .money-report-where-band:nth-of-type(2) {
+    animation-delay: 80ms;
+  }
+
+  [data-motion='full'] .money-report-where-ribbon:nth-child(3),
+  [data-motion='full'] .money-report-where-band:nth-of-type(3) {
+    animation-delay: 120ms;
+  }
+
+  [data-motion='full'] .money-report-where-ribbon:nth-child(4),
+  [data-motion='full'] .money-report-where-band:nth-of-type(4) {
+    animation-delay: 160ms;
+  }
+
+  .money-report-where-labels-overlay {
+    @apply pointer-events-none absolute inset-0;
+  }
+
+  .money-report-where-node {
+    @apply absolute flex flex-col;
+    gap: 1px;
+    transform: translateY(-50%);
+  }
+
+  .money-report-where-node--in {
+    left: 2%;
+    max-width: 30%;
+  }
+
+  .money-report-where-node--group {
+    left: 34.5%;
+    max-width: 28%;
+  }
+
+  .money-report-where-node--cat {
+    left: 81.5%;
+    max-width: 18%;
+  }
+
+  .money-report-where-node-name {
+    @apply truncate text-xs font-semibold;
+    color: var(--moss-text-primary);
+  }
+
+  .money-report-where-node-dot {
+    @apply mr-1.5 inline-block shrink-0 rounded-full align-middle;
+    width: 7px;
+    height: 7px;
+  }
+
+  .money-report-where-node--in .money-report-where-node-name {
+    @apply text-xs font-medium;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-report-where-node-value {
+    @apply text-xs tabular-nums;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-report-where-node-total {
+    @apply text-lg font-bold tabular-nums;
+    color: var(--moss-text-display);
+  }
+
+  .money-report-where-stack-track {
+    @apply flex h-3 w-full overflow-hidden rounded-full;
+    background: oklch(from var(--moss-border) l c h / 0.4);
+  }
+
+  .money-report-where-stack-seg {
+    @apply block h-full;
+    min-width: 2px;
+  }
+
+  .money-report-where-stack-legend {
+    @apply m-0 flex list-none flex-col gap-2 p-0;
+  }
+
+  .money-report-where-stack-row {
+    @apply grid items-center gap-2 text-sm;
+    grid-template-columns: auto 1fr auto auto;
+  }
+
+  .money-report-where-stack-swatch {
+    @apply block h-2.5 w-2.5 shrink-0 rounded-sm;
+  }
+
+  .money-report-where-stack-name {
+    color: var(--moss-text-primary);
+  }
+
+  .money-report-where-stack-value {
+    color: var(--moss-text-display);
+  }
+
+  .money-report-where-stack-pct {
+    @apply text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-savings-list {
+    @apply m-0 flex list-none flex-col gap-4 p-0;
+  }
+
+  .money-reports-savings-head {
+    @apply mb-1 flex items-baseline justify-between gap-2 text-sm;
+  }
+
+  .money-reports-savings-name {
+    font-weight: 600;
+    color: var(--moss-text-primary);
+  }
+
+  .money-reports-savings-track {
+    @apply block h-1.5 overflow-hidden rounded-full;
+    background: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-reports-savings-fill {
+    @apply block h-full rounded-full;
+    background: var(--moss-accent);
+  }
+
+  .money-reports-savings-why {
+    @apply mt-1 text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-reports-est-chip {
+    @apply ml-2;
+  }
+
+  .money-panels {
+    @apply flex flex-col gap-4;
+  }
+
+  .money-card {
+    @apply w-full max-w-2xl;
+  }
+
+  .money-list {
+    @apply m-0 list-none p-0;
+  }
+
+  .money-list-empty {
+    @apply py-3 text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-list-row {
+    @apply flex items-center justify-between gap-3 border-b py-2 text-sm;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-form {
+    @apply mt-4 flex flex-wrap items-end gap-2;
+  }
+
+  .money-form--stack {
+    @apply flex-col items-stretch;
+  }
+
+  .money-input {
+    @apply min-h-[2.5rem] rounded-lg px-3 py-2 text-sm;
+    font-family: var(--font-body);
+    color: var(--moss-text-primary);
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.65);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.65);
+  }
+
+  .money-input--amount {
+    max-width: 8rem;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .money-input--select {
+    min-width: 0;
+  }
+
+  .money-investments-total {
+    @apply mb-3 text-sm font-medium;
+    color: oklch(from var(--moss-accent) l c h / 0.9);
+  }
+
+  .money-investments-row {
+    @apply border-b border-[color-mix(in_oklch,var(--moss-chassis-border)_55%,transparent)] last:border-b-0;
+  }
+
+  .money-investments-row-head {
+    @apply flex w-full items-center justify-between gap-3 py-2.5 text-left;
+    color: inherit;
+  }
+
+  .money-investments-row-label {
+    @apply flex min-w-0 flex-col gap-0.5;
+  }
+
+  .money-investments-type {
+    @apply font-mono text-xs uppercase tracking-[0.12em];
+    color: var(--moss-chassis-text-muted);
+  }
+
+  .money-investments-asof {
+    @apply font-mono text-xs;
+    color: var(--moss-chassis-text-muted);
+  }
+
+  .money-investments-detail {
+    @apply pb-3 pl-1;
+  }
+
+  .money-investments-notes {
+    @apply mb-2 text-xs;
+    color: var(--moss-chassis-text-muted);
+  }
+
+  .money-list--nested {
+    @apply mb-2 ml-1 border-l pl-3;
+    border-color: color-mix(in oklch, var(--moss-chassis-border) 55%, transparent);
+  }
+
+  /* —— V2f Import / Export —— */
+  .money-data-panel {
+    @apply flex flex-col gap-5;
+  }
+
+  .money-data-notice {
+    @apply rounded-lg px-4 py-3 text-sm;
+    border: 1px solid oklch(from var(--moss-accent) l c h / 0.35);
+    background: oklch(from var(--moss-accent) l c h / 0.1);
+    color: var(--moss-text-primary);
+  }
+
+  .money-data-card {
+    @apply flex flex-col gap-3 rounded-xl p-5;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface-raised) l c h / 0.6);
+  }
+
+  .money-data-kicker {
+    @apply text-xs font-semibold uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-title {
+    @apply text-lg font-semibold;
+    color: var(--moss-text-display);
+  }
+
+  .money-data-copy {
+    @apply max-w-prose text-sm leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-actions {
+    @apply flex flex-wrap gap-2 pt-1;
+  }
+
+  .money-data-export-grid {
+    @apply grid gap-2 pt-1;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+
+  .money-data-trust {
+    @apply pt-1 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-drop {
+    @apply relative transition-colors duration-150;
+  }
+
+  .money-data-drop--active {
+    border-color: oklch(from var(--moss-accent) l c h / 0.55);
+    background: oklch(from var(--moss-accent) l c h / 0.08);
+  }
+
+  .money-data-drop-zone {
+    @apply flex items-center justify-center rounded-lg py-6 text-sm;
+    border: 1px dashed oklch(from var(--moss-border) l c h / 0.65);
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-drop--active .money-data-drop-zone {
+    border-color: oklch(from var(--moss-accent) l c h / 0.5);
+    color: var(--moss-text-primary);
+  }
+
+  .money-data-drop-label {
+    @apply font-medium;
+  }
+
+  .money-data-preset {
+    @apply max-w-md;
+  }
+
+  .money-settings-panel {
+    @apply flex flex-col gap-4;
+  }
+
+  .money-settings-card {
+    @apply gap-3;
+  }
+
+  .money-settings-field {
+    @apply flex flex-col gap-2 pt-1;
+  }
+
+  .money-settings-label {
+    @apply text-sm;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-settings-select {
+    max-width: 18rem;
+  }
+
+  .money-settings-actions {
+    @apply flex flex-col gap-2 pt-2;
+  }
+
+  .money-settings-meta {
+    @apply text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-settings-stats {
+    @apply grid gap-2 pt-2;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  }
+
+  .money-settings-stat-label {
+    @apply block text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-settings-stat-value {
+    @apply text-base;
+    color: var(--moss-text-primary);
+  }
+
+  .money-settings-surfaces {
+    @apply flex flex-col gap-3 pt-1;
+  }
+
+  .money-settings-surface {
+    @apply rounded-lg border px-3 py-2;
+    border-color: oklch(from var(--moss-border) l c h / 0.55);
+    background: oklch(from var(--moss-surface) l c h / 0.35);
+  }
+
+  .money-settings-surface-head {
+    @apply flex flex-wrap items-center justify-between gap-2;
+  }
+
+  .money-settings-surface-label {
+    @apply text-sm font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .money-settings-surface-why {
+    @apply pt-1 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-settings-advanced {
+    padding: 0.875rem 1rem;
+  }
+
+  .money-settings-advanced .moss-choice__copy {
+    order: 1;
+  }
+
+  .money-settings-advanced .moss-choice__indicator {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .money-detail-rail-derived-badge {
+    @apply ml-1 align-middle;
+  }
+
+  .money-data-import {
+    @apply gap-4;
+  }
+
+  .money-data-import-head {
+    @apply flex flex-wrap items-start justify-between gap-4;
+  }
+
+  .money-data-import-quick {
+    @apply grid gap-3;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  }
+
+  .money-data-advanced {
+    @apply rounded-lg border px-4 py-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-data-advanced-summary {
+    @apply cursor-pointer text-sm font-medium;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-advanced[open] .money-data-advanced-summary {
+    @apply mb-3;
+  }
+
+  .money-data-advanced .money-data-mapping {
+    @apply mb-3;
+  }
+
+  .money-data-mapping {
+    @apply grid gap-2;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  }
+
+  .money-data-mapping-row {
+    @apply flex items-center gap-2;
+  }
+
+  .money-data-mapping-source {
+    @apply flex-1 truncate text-sm;
+    min-width: 0;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-mapping-arrow {
+    color: var(--moss-text-muted, var(--moss-text-secondary));
+  }
+
+  .money-data-mapping-select {
+    @apply w-[9.5rem] shrink-0;
+  }
+
+  .money-data-options {
+    @apply flex flex-wrap items-end gap-4 rounded-lg p-3;
+    background: oklch(from var(--moss-surface) l c h / 0.4);
+  }
+
+  .money-data-option {
+    @apply flex min-w-[11rem] flex-col gap-1;
+  }
+
+  .money-data-option-label {
+    @apply text-xs font-medium;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-summary {
+    @apply flex flex-wrap gap-4 text-sm;
+  }
+
+  .money-data-stat--ok {
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-data-stat--dup {
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-stat--err {
+    color: oklch(0.62 0.14 32);
+  }
+
+  .money-data-hint {
+    @apply text-xs leading-relaxed;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-preview {
+    @apply w-full border-collapse text-sm;
+  }
+
+  .money-data-preview th {
+    @apply px-2 py-2 text-left text-xs font-semibold uppercase;
+    letter-spacing: 0.08em;
+    color: var(--moss-text-secondary);
+    border-bottom: 1px solid oklch(from var(--moss-border) l c h / 0.5);
+  }
+
+  .money-data-preview td {
+    @apply px-2 py-2;
+    border-bottom: 1px solid oklch(from var(--moss-border) l c h / 0.3);
+  }
+
+  .money-data-preview-num {
+    @apply text-right;
+  }
+
+  .money-data-preview-row--duplicate td,
+  .money-data-preview-row--error td {
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-unmatched {
+    color: var(--moss-text-secondary);
+    font-style: italic;
+  }
+
+  .money-data-chip {
+    @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    color: var(--moss-text-secondary);
+  }
+
+  .money-data-chip--ok {
+    border-color: oklch(from var(--moss-accent) l c h / 0.4);
+    background: oklch(from var(--moss-accent) l c h / 0.12);
+    color: oklch(from var(--moss-accent) l c h);
+  }
+
+  .money-data-chip--error {
+    border-color: oklch(0.62 0.14 32 / 0.4);
+    color: oklch(0.62 0.14 32);
+  }
+
+  .money-field-label {
+    @apply flex flex-col gap-1 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-category-row {
+    @apply border-b py-3;
+    border-color: oklch(from var(--moss-border) l c h / 0.45);
+  }
+
+  .money-category-head {
+    @apply flex items-baseline justify-between gap-2;
+  }
+
+  .money-category-name {
+    @apply text-sm font-medium;
+    color: var(--moss-text-primary);
+  }
+
+  .money-category-meta {
+    @apply text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  .money-category-fields {
+    @apply mt-2 flex flex-wrap items-end gap-2;
+  }
+
+  .money-category-spent {
+    @apply mt-1 text-xs;
+    color: var(--moss-text-secondary);
+  }
+
+  /* Legacy .money-list--ledger / flex .money-ledger-row removed — it overrode the
+     register grid and broke column alignment. */
+  .money-kind-toggle {
+    @apply flex gap-2;
+  }
+
+  .money-kind {
+    @apply rounded-lg px-3 py-1.5 text-xs font-medium uppercase tracking-wide;
+    border: 1px solid oklch(from var(--moss-border) l c h / 0.55);
+    color: var(--moss-text-secondary);
+  }
+
+  .money-kind--active {
+    border-color: oklch(from var(--moss-accent) l c h / 0.45);
+    color: var(--moss-text-primary);
+  }
+
+  .money-error {
+    @apply mb-4 text-sm;
+    color: var(--moss-signal-error-text, oklch(0.62 0.18 25));
+  }

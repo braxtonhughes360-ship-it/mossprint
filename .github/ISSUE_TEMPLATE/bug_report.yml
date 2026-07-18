@@ -1,0 +1,86 @@
+name: Beta bug
+description: Tell us what broke or felt confusing in a MOSS beta build.
+title: "[Beta bug]: "
+labels:
+  - beta-ux
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve MOSS.
+
+        **Never paste passwords, recovery phrases, OAuth codes, API keys, email contents, financial records, or other personal data into an issue.** Security problems must be reported privately through the repository's Security tab.
+  - type: input
+    id: version
+    attributes:
+      label: MOSS version
+      description: Find this in Settings → About.
+      placeholder: 0.9.0-beta.5
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - macOS — Apple silicon
+        - macOS — Intel
+        - Windows 10/11
+        - Linux — AppImage
+        - Linux — deb
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where did it happen?
+      options:
+        - Setup or first launch
+        - Dashboard
+        - Calendar
+        - Financials
+        - Nutrition
+        - News
+        - Inbox
+        - Notes
+        - Settings or updates
+        - Somewhere else
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Exactly what did you do?
+      description: A short numbered sequence is ideal. Remove or replace all personal information.
+      placeholder: |
+        1. Opened …
+        2. Clicked …
+        3. Saw …
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What did you see?
+      description: Include the exact on-screen wording when useful, but never include personal records or secrets.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: attachment
+    attributes:
+      label: Optional screenshot
+      description: Crop or blur names, messages, balances, calendar details, and any other personal information before attaching.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed passwords, tokens, recovery phrases, and personal records from this report.
+          required: true

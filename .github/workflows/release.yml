@@ -1,0 +1,95 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Cache Electron binaries
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/electron
+            ~/.cache/electron-builder
+            ~/Library/Caches/electron
+            ~/Library/Caches/electron-builder
+            ~/AppData/Local/electron/Cache
+            ~/AppData/Local/electron-builder/Cache
+          key: electron-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            electron-${{ runner.os }}-
+
+      # postinstall runs `electron-builder install-app-deps`, which rebuilds
+      # better-sqlite3-multiple-ciphers against the Electron ABI per-platform.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify native module rebuild (better-sqlite3)
+        shell: bash
+        run: |
+          ls node_modules/better-sqlite3-multiple-ciphers/build/Release/*.node
+
+      # LA7 — bundle the llama.cpp runtime for this runner's platform(s). The
+      # ~2GB model is NOT bundled; it downloads on first run with consent. A
+      # checksum mismatch fails the build; a network flake leaves an empty dir
+      # (that arch ships without the runtime and degrades to heuristic parsing).
+      - name: Fetch bundled local-AI runtime
+        shell: bash
+        run: |
+          case "$RUNNER_OS" in
+            macOS)   npm run runtime:fetch:mac ;;
+            Windows) node scripts/fetch-local-runtime.mjs --target=win32-x64 ;;
+            Linux)   node scripts/fetch-local-runtime.mjs --target=linux-x64 ;;
+          esac
+
+      - name: Build and publish
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Allow publishing to a release created more than 2 hours ago —
+          # electron-builder otherwise skips uploads to a pre-existing release
+          # (the macOS artifacts + curated notes were published first).
+          EP_GH_IGNORE_TIME: "true"
+          # Apple signing + notarization: only forwarded when the secrets exist.
+          # electron-builder skips notarization (with a warning) when these are
+          # absent, and CSC_IDENTITY_AUTO_DISCOVERY=false below prevents a
+          # missing-cert failure on unsigned macOS builds.
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+        run: |
+          # Missing GH secrets arrive as empty strings, and electron-builder
+          # treats a present-but-empty CSC_LINK as a cert path ("not a file"),
+          # so the vars must be unset, not just empty.
+          if [ -z "$CSC_LINK" ]; then
+            unset CSC_LINK CSC_KEY_PASSWORD
+            export CSC_IDENTITY_AUTO_DISCOVERY=false
+            echo "No CSC_LINK secret - building unsigned"
+          fi
+          if [ -z "$APPLE_ID" ]; then
+            unset APPLE_ID APPLE_APP_SPECIFIC_PASSWORD APPLE_TEAM_ID
+            echo "No APPLE_ID secret - notarization will be skipped"
+          fi
+          npm run build
+          npx electron-builder --publish always

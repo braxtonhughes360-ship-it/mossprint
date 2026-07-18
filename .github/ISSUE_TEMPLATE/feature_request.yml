@@ -1,0 +1,54 @@
+name: Beta idea
+description: Suggest one change that would make MOSS clearer or more useful.
+title: "[Beta idea]: "
+labels:
+  - beta-feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The most useful ideas begin with a real moment of friction.
+
+        **Never paste passwords, recovery phrases, tokens, email contents, financial records, or other personal data into an issue.** Report security problems privately through the repository's Security tab.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Setup or first launch
+        - Dashboard
+        - Calendar
+        - Financials
+        - Nutrition
+        - News
+        - Inbox
+        - Notes
+        - Settings or updates
+        - Whole app
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: What were you trying to do?
+      description: Describe the real task and where MOSS slowed you down or left you unsure.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What would make that moment better?
+    validations:
+      required: true
+  - type: textarea
+    id: payoff
+    attributes:
+      label: How often would this help?
+      placeholder: Every morning, once a month, only during setup …
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed passwords, tokens, recovery phrases, and personal records from this request.
+          required: true

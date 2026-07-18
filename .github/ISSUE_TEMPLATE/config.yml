@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security problem privately
+    url: https://github.com/braxtonhughes360-ship-it/mossprint/security/advisories/new
+    about: Never put vulnerabilities, passwords, tokens, or personal records in a public issue.
